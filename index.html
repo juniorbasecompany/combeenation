@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ComBEEnation provides humane live bee removal, colony relocation, apiary care and local raw honey throughout South Florida.">
+    <meta name="theme-color" content="#f6b719">
+    <title>ComBEEnation | Saving Bees Across South Florida</title>
+    <style>
+        /* =========================================================
+           DESIGN TOKENS - ajuste a identidade visual por aqui
+           ========================================================= */
+        :root {
+            --color-honey: #f6b719;
+            --color-honey-light: #ffd966;
+            --color-honey-pale: #fff1bd;
+            --color-ink: #17140f;
+            --color-bark: #33291e;
+            --color-cream: #fffaf0;
+            --color-paper: #f7f0df;
+            --color-white: #ffffff;
+            --color-red: #db3b2f;
+            --color-green: #3e6848;
+            --color-line: rgba(23, 20, 15, .14);
+            --color-shadow: rgba(41, 31, 18, .16);
+
+            --font-display: Georgia, "Times New Roman", serif;
+            --font-body: Arial, Helvetica, sans-serif;
+
+            --page-padding: clamp(1.25rem, 4vw, 4.5rem);
+            --section-padding: clamp(4.5rem, 9vw, 8.5rem);
+            --content-width: 1240px;
+            --text-width: 680px;
+
+            --radius-sm: 12px;
+            --radius-md: 24px;
+            --radius-lg: 40px;
+            --radius-pill: 999px;
+
+            --shadow-card: 0 22px 60px var(--color-shadow);
+            --transition: 220ms cubic-bezier(.2, .75, .25, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            color: var(--color-ink);
+            background: var(--color-cream);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        body.menu-open { overflow: hidden; }
+        a { color: inherit; }
+        img { display: block; max-width: 100%; }
+        button, input, textarea, select { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        :focus-visible { outline: 3px solid var(--color-red); outline-offset: 4px; }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .container {
+            width: min(var(--content-width), calc(100% - (var(--page-padding) * 2)));
+            margin-inline: auto;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .65rem;
+            margin: 0 0 1rem;
+            color: var(--color-green);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+        .eyebrow::before {
+            content: "";
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+        }
+        h1, h2, h3, p { margin-top: 0; }
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            letter-spacing: -.035em;
+            line-height: .98;
+        }
+        h1 { font-size: clamp(3.5rem, 8vw, 7.8rem); font-weight: 700; }
+        h2 { font-size: clamp(2.7rem, 5.2vw, 5.5rem); }
+        h3 { font-size: clamp(1.45rem, 2vw, 2rem); line-height: 1.08; }
+        .section-intro {
+            max-width: var(--text-width);
+            color: #5b5146;
+            font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+        }
+        .button {
+            display: inline-flex;
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            gap: .7rem;
+            padding: .9rem 1.35rem;
+            border: 1px solid transparent;
+            border-radius: var(--radius-pill);
+            background: var(--color-ink);
+            color: var(--color-white);
+            font-weight: 800;
+            text-decoration: none;
+            transition: transform var(--transition), background var(--transition), color var(--transition);
+        }
+        .button:hover { transform: translateY(-3px); background: var(--color-red); }
+        .button--light { background: var(--color-white); color: var(--color-ink); }
+        .button--outline { border-color: currentColor; background: transparent; color: var(--color-ink); }
+        .button--outline:hover { background: var(--color-ink); color: var(--color-white); }
+        .button__arrow { font-size: 1.25rem; transition: transform var(--transition); }
+        .button:hover .button__arrow { transform: translateX(4px); }
+
+        /* Navegação */
+        .site-header {
+            position: absolute;
+            z-index: 30;
+            top: 0;
+            left: 0;
+            width: 100%;
+            color: var(--color-white);
+        }
+        .nav {
+            display: flex;
+            min-height: 96px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
+            color: inherit;
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 2vw, 1.7rem);
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .logo__mark {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--color-honey);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+        }
+        .logo strong { color: var(--color-honey); }
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: clamp(1rem, 2.2vw, 2.2rem);
+        }
+        .language-switcher {
+            display: inline-flex;
+            gap: .15rem;
+            padding: .2rem;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: var(--radius-pill);
+        }
+        .language-switcher button {
+            min-width: 34px;
+            padding: .35rem .45rem;
+            border: 0;
+            border-radius: var(--radius-pill);
+            background: transparent;
+            color: inherit;
+            font-size: .68rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .language-switcher button[aria-pressed="true"] {
+            background: var(--color-honey);
+            color: var(--color-ink);
+        }
+        .nav__links a:not(.button) {
+            font-size: .88rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .nav__links a:not(.button):hover { color: var(--color-honey); }
+        .menu-toggle {
+            display: none;
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(255,255,255,.35);
+            border-radius: 50%;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 800px;
+            overflow: hidden;
+            padding: clamp(10rem, 18vw, 14rem) 0 7rem;
+            background:
+                radial-gradient(circle at 72% 24%, rgba(246,183,25,.22), transparent 30%),
+                linear-gradient(120deg, #14110c 0%, #2e2419 58%, #18130e 100%);
+            color: var(--color-white);
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .12;
+            background-image:
+                linear-gradient(30deg, #f6b719 12%, transparent 12.5%, transparent 87%, #f6b719 87.5%, #f6b719),
+                linear-gradient(150deg, #f6b719 12%, transparent 12.5%, transparent 87%, #f6b719 87.5%, #f6b719),
+                linear-gradient(30deg, #f6b719 12%, transparent 12.5%, transparent 87%, #f6b719 87.5%, #f6b719),
+                linear-gradient(150deg, #f6b719 12%, transparent 12.5%, transparent 87%, #f6b719 87.5%, #f6b719),
+                linear-gradient(60deg, rgba(246,183,25,.8) 25%, transparent 25.5%, transparent 75%, rgba(246,183,25,.8) 75%);
+            background-position: 0 0, 0 0, 28px 49px, 28px 49px, 0 0;
+            background-size: 56px 98px;
+            mask-image: linear-gradient(90deg, transparent 30%, #000 100%);
+        }
+        .hero__grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
+            align-items: center;
+            gap: clamp(2rem, 5vw, 6rem);
+        }
+        .hero .eyebrow { color: var(--color-honey); }
+        .hero h1 { max-width: 760px; margin-bottom: 1.5rem; }
+        .hero h1 span { color: var(--color-honey); font-style: italic; }
+        .hero__lede {
+            max-width: 620px;
+            margin-bottom: 2rem;
+            color: #e8dfd2;
+            font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+        }
+        .hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+        .hero__actions .button:first-child { background: var(--color-honey); color: var(--color-ink); }
+        .hero__actions .button:first-child:hover { background: var(--color-white); }
+        .hero__actions .button--outline { color: var(--color-white); }
+        .hero__visual {
+            position: relative;
+            display: grid;
+            min-height: 470px;
+            place-items: center;
+        }
+        .hero__sun {
+            position: absolute;
+            width: min(34vw, 430px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: var(--color-honey);
+            box-shadow: 0 0 0 26px rgba(246,183,25,.07), 0 0 0 52px rgba(246,183,25,.04);
+        }
+        .buddy {
+            position: relative;
+            z-index: 1;
+            width: min(28vw, 340px);
+            filter: drop-shadow(0 22px 20px rgba(0,0,0,.34));
+        }
+        .buddy-badge {
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            bottom: 2rem;
+            max-width: 180px;
+            padding: 1rem 1.2rem;
+            border: 2px solid var(--color-ink);
+            border-radius: 18px;
+            background: var(--color-white);
+            color: var(--color-ink);
+            box-shadow: 8px 8px 0 var(--color-red);
+            transform: rotate(3deg);
+        }
+        .buddy-badge strong { display: block; font-family: var(--font-display); font-size: 1.2rem; }
+        .buddy-badge span { font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+        .hero__trust {
+            position: absolute;
+            z-index: 3;
+            right: var(--page-padding);
+            bottom: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            color: #d6ccbe;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        /* Faixa de propósito */
+        .purpose-strip { overflow: hidden; background: var(--color-honey); color: var(--color-ink); }
+        .purpose-strip__track {
+            display: flex;
+            width: max-content;
+            animation: ticker 24s linear infinite;
+        }
+        .purpose-strip__item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1rem 1.25rem;
+            font-family: var(--font-display);
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .purpose-strip__item::after { content: "✦"; color: var(--color-red); }
+        @keyframes ticker { to { transform: translateX(-50%); } }
+
+        /* Serviços */
+        .services { padding: var(--section-padding) 0; }
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(280px, .55fr);
+            align-items: end;
+            gap: 2rem;
+            margin-bottom: 3.5rem;
+        }
+        .section-heading h2 { max-width: 800px; margin-bottom: 0; }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--color-line);
+            border-left: 1px solid var(--color-line);
+        }
+        .service-card {
+            position: relative;
+            min-height: 330px;
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            overflow: hidden;
+            border-right: 1px solid var(--color-line);
+            border-bottom: 1px solid var(--color-line);
+            background: rgba(255,255,255,.45);
+            transition: background var(--transition), transform var(--transition);
+        }
+        .service-card:hover { z-index: 2; background: var(--color-white); transform: translateY(-8px); box-shadow: var(--shadow-card); }
+        .service-card__number {
+            display: block;
+            margin-bottom: clamp(4rem, 8vw, 7rem);
+            color: #716657;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+        }
+        .service-card h3 { max-width: 240px; margin-bottom: .8rem; }
+        .service-card p { margin-bottom: 0; color: #62584c; }
+        .service-card__icon {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: grid;
+            width: 58px;
+            height: 58px;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--color-honey-pale);
+            font-size: 1.55rem;
+        }
+        .thermal {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-top: 2rem;
+            padding: clamp(1.35rem, 3vw, 1.85rem) clamp(1.4rem, 3vw, 2rem);
+            border-radius: var(--radius-md);
+            background: var(--color-ink);
+            color: var(--color-cream);
+            box-shadow: var(--shadow-card);
+        }
+        .thermal__icon {
+            flex: 0 0 auto;
+            width: 48px;
+            height: 48px;
+        }
+        .thermal p {
+            margin: 0;
+            color: #d8cfc1;
+            font-size: clamp(1rem, 1.4vw, 1.12rem);
+        }
+        .thermal strong { color: var(--color-honey); }
+
+        /* Processo */
+        .process {
+            position: relative;
+            overflow: hidden;
+            padding: var(--section-padding) 0;
+            background: var(--color-green);
+            color: var(--color-white);
+        }
+        .process .eyebrow { color: var(--color-honey-light); }
+        .process__layout {
+            display: grid;
+            grid-template-columns: .75fr 1.25fr;
+            gap: clamp(3rem, 8vw, 8rem);
+        }
+        .process__sticky { align-self: start; position: sticky; top: 3rem; }
+        .process__sticky p { color: #dce6dc; }
+        .steps { counter-reset: steps; }
+        .step {
+            position: relative;
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 1.5rem;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255,255,255,.23);
+            counter-increment: steps;
+        }
+        .step:last-child { border-bottom: 1px solid rgba(255,255,255,.23); }
+        .step::before {
+            content: "0" counter(steps);
+            color: var(--color-honey-light);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .step h3 { margin-bottom: .65rem; }
+        .step p { max-width: 550px; margin-bottom: 0; color: #dce6dc; }
+
+        /* História */
+        .story { padding: var(--section-padding) 0; }
+        .story__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: clamp(3rem, 8vw, 8rem);
+        }
+        .story__art {
+            position: relative;
+            min-height: 620px;
+            border-radius: var(--radius-lg);
+            background:
+                radial-gradient(circle at 50% 28%, #ffe7a0 0 18%, transparent 18.5%),
+                linear-gradient(145deg, var(--color-honey) 0 48%, var(--color-bark) 48%);
+            box-shadow: var(--shadow-card);
+        }
+        .story__art::before {
+            content: "THE HOUSE OF";
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            color: var(--color-ink);
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: .18em;
+        }
+        .story__art .buddy {
+            position: absolute;
+            right: 50%;
+            bottom: 0;
+            width: 58%;
+            transform: translateX(50%);
+        }
+        .story__stamp {
+            position: absolute;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            display: grid;
+            width: 138px;
+            aspect-ratio: 1;
+            place-items: center;
+            padding: 1rem;
+            border-radius: 50%;
+            background: var(--color-red);
+            color: var(--color-white);
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.05;
+            text-align: center;
+            transform: rotate(-8deg);
+        }
+        .story__copy h2 { margin-bottom: 1.5rem; }
+        .story__copy > p { color: #5e5449; font-size: 1.08rem; }
+        .quote {
+            margin: 2rem 0;
+            padding: 1.5rem 0 1.5rem 1.5rem;
+            border-left: 4px solid var(--color-honey);
+            font-family: var(--font-display);
+            font-size: clamp(1.35rem, 2vw, 1.8rem);
+            font-style: italic;
+            line-height: 1.28;
+        }
+        .values { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
+        .value {
+            padding: .55rem .9rem;
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-pill);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        /* Mel */
+        .honey-section {
+            position: relative;
+            overflow: hidden;
+            padding: var(--section-padding) 0;
+            background: var(--color-honey);
+        }
+        .honey-section::after {
+            content: "";
+            position: absolute;
+            right: -12vw;
+            bottom: -20vw;
+            width: 55vw;
+            aspect-ratio: 1;
+            border: clamp(60px, 9vw, 140px) solid rgba(255,255,255,.18);
+            border-radius: 50%;
+        }
+        .honey__grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: clamp(3rem, 8vw, 8rem);
+        }
+        .honey__copy h2 { margin-bottom: 1.5rem; }
+        .honey__copy p { max-width: 590px; font-size: 1.1rem; }
+        .honey__facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            margin: 2.2rem 0;
+            background: rgba(23,20,15,.25);
+            border: 1px solid rgba(23,20,15,.25);
+        }
+        .honey__fact { padding: 1.2rem; background: var(--color-honey); }
+        .honey__fact strong { display: block; font-family: var(--font-display); font-size: 1.2rem; }
+        .honey__fact span { font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+        .honey-jar {
+            position: relative;
+            width: min(100%, 420px);
+            aspect-ratio: .82;
+            margin-inline: auto;
+            border: 12px solid var(--color-ink);
+            border-radius: 42% 42% 22% 22% / 18% 18% 12% 12%;
+            background: linear-gradient(90deg, #cf700b, #ffc737 25%, #f0a612 68%, #b86008);
+            box-shadow: 24px 28px 0 rgba(255,255,255,.35);
+        }
+        .honey-jar::before {
+            content: "";
+            position: absolute;
+            top: -45px;
+            left: 13%;
+            width: 74%;
+            height: 54px;
+            border: 10px solid var(--color-ink);
+            border-radius: 12px 12px 5px 5px;
+            background: var(--color-white);
+        }
+        .jar-label {
+            position: absolute;
+            top: 27%;
+            left: 8%;
+            width: 84%;
+            padding: 2.3rem 1.2rem;
+            border: 5px solid var(--color-ink);
+            border-radius: 50%;
+            background: var(--color-cream);
+            text-align: center;
+            transform: rotate(-3deg);
+        }
+        .jar-label small { font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+        .jar-label strong { display: block; margin: .3rem 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.1rem); line-height: .9; }
+        .jar-label span { font-size: .78rem; font-weight: 800; }
+
+        /* Área de atendimento */
+        .area { padding: var(--section-padding) 0; background: var(--color-paper); }
+        .area__card {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            min-height: 500px;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: var(--color-ink);
+            color: var(--color-white);
+            box-shadow: var(--shadow-card);
+        }
+        .area__copy { padding: clamp(2rem, 6vw, 5.5rem); }
+        .area__copy .eyebrow { color: var(--color-honey); }
+        .area__copy p { color: #d8cfc1; }
+        .area__map {
+            position: relative;
+            display: grid;
+            min-height: 420px;
+            place-items: center;
+            overflow: hidden;
+            background: var(--color-honey);
+            color: var(--color-ink);
+        }
+        .florida {
+            position: relative;
+            width: 180px;
+            height: 330px;
+            border-radius: 48% 36% 60% 42% / 18% 30% 70% 82%;
+            background: var(--color-cream);
+            box-shadow: 16px 18px 0 rgba(23,20,15,.15);
+            transform: rotate(-18deg);
+        }
+        .florida::before {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: -112px;
+            width: 170px;
+            height: 82px;
+            border-radius: 70% 10% 50% 45%;
+            background: var(--color-cream);
+        }
+        .florida::after {
+            content: "SOUTH FLORIDA";
+            position: absolute;
+            right: -72px;
+            bottom: 48px;
+            width: 160px;
+            padding: .75rem;
+            border-radius: var(--radius-pill);
+            background: var(--color-red);
+            color: var(--color-white);
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+            text-align: center;
+            transform: rotate(18deg);
+        }
+
+        /* Preços */
+        .pricing {
+            padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+            background: var(--color-paper);
+        }
+        .pricing__head {
+            max-width: 560px;
+            margin-bottom: 2rem;
+        }
+        .pricing__head h2 {
+            margin-bottom: .75rem;
+            font-size: clamp(2rem, 3.8vw, 3rem);
+        }
+        .pricing__head .section-intro {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+        .price-list {
+            display: grid;
+            max-width: 760px;
+            border-top: 1px solid var(--color-line);
+        }
+        .price-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 1rem 2rem;
+            align-items: center;
+            padding: 1.15rem 0;
+            border-bottom: 1px solid var(--color-line);
+        }
+        .price-row__copy h3 {
+            margin: 0 0 .35rem;
+            font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+            line-height: 1.15;
+        }
+        .price-row__copy p {
+            margin: 0;
+            color: #5b5146;
+            font-size: .95rem;
+            line-height: 1.5;
+        }
+        .price-row__value {
+            color: var(--color-ink);
+            font-family: var(--font-display);
+            font-size: clamp(1.55rem, 2.4vw, 1.9rem);
+            font-weight: 700;
+            letter-spacing: -.03em;
+            line-height: 1;
+            text-align: right;
+            white-space: nowrap;
+        }
+        .price-row__value small {
+            display: block;
+            margin-bottom: .2rem;
+            color: var(--color-green);
+            font-family: var(--font-body);
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+        .price-note {
+            max-width: 62ch;
+            margin: 1.5rem 0 0;
+            padding-left: 1rem;
+            border-left: 3px solid var(--color-honey);
+            color: #5b5146;
+            font-size: .88rem;
+            line-height: 1.55;
+        }
+        .price-cta { margin-top: 1.5rem; }
+
+        /* FAQ */
+        .faq { padding: var(--section-padding) 0; }
+        .faq .section-heading { margin-bottom: 2.5rem; }
+        .faq__list {
+            display: grid;
+            border-top: 1px solid var(--color-line);
+        }
+        .faq details {
+            border-bottom: 1px solid var(--color-line);
+            background: transparent;
+        }
+        .faq summary {
+            position: relative;
+            list-style: none;
+            cursor: pointer;
+            padding: 1.45rem 3.5rem 1.45rem 0;
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 2vw, 1.55rem);
+            font-weight: 700;
+            letter-spacing: -.02em;
+            line-height: 1.2;
+            transition: color var(--transition);
+        }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after {
+            content: "+";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 2rem;
+            height: 2rem;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--color-honey-pale);
+            color: var(--color-ink);
+            font-family: var(--font-body);
+            font-size: 1.25rem;
+            font-weight: 800;
+            line-height: 1;
+            transform: translateY(-50%);
+            transition: background var(--transition), transform var(--transition), color var(--transition);
+        }
+        .faq details[open] summary { color: var(--color-green); }
+        .faq details[open] summary::after {
+            content: "−";
+            background: var(--color-honey);
+            transform: translateY(-50%) rotate(180deg);
+        }
+        .faq summary:hover { color: var(--color-green); }
+        .faq details p {
+            max-width: 68ch;
+            margin: 0;
+            padding: 0 3.5rem 1.6rem 0;
+            color: #5b5146;
+            font-size: 1.05rem;
+        }
+
+        /* Contato */
+        .contact { padding: var(--section-padding) 0; background: var(--color-ink); color: var(--color-white); }
+        .contact__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(3rem, 8vw, 8rem);
+        }
+        .contact .eyebrow { color: var(--color-honey); }
+        .contact h2 { max-width: 620px; }
+        .contact__lede { max-width: 560px; color: #d7cdbf; font-size: 1.15rem; }
+        .contact__options { display: grid; gap: 1rem; margin-top: 2.5rem; }
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid rgba(255,255,255,.2);
+            color: var(--color-white);
+            font-size: clamp(1rem, 1.8vw, 1.35rem);
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .contact-link span:first-child { color: var(--color-honey); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+        .contact-link:hover { color: var(--color-honey); }
+        .request-card {
+            padding: clamp(1.5rem, 4vw, 3rem);
+            border-radius: var(--radius-md);
+            background: var(--color-cream);
+            color: var(--color-ink);
+        }
+        .request-card h3 { margin-bottom: .6rem; font-size: 2rem; }
+        .request-card > p { color: #665b4e; }
+        .field { display: grid; gap: .4rem; margin-top: 1rem; }
+        .field label { font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+        .field input, .field select, .field textarea {
+            width: 100%;
+            border: 1px solid var(--color-line);
+            border-radius: var(--radius-sm);
+            background: var(--color-white);
+            color: var(--color-ink);
+            padding: .9rem 1rem;
+        }
+        .field textarea { min-height: 110px; resize: vertical; }
+        .request-card .button { width: 100%; margin-top: 1.3rem; border: 0; cursor: pointer; }
+        .form-note { margin: .8rem 0 0; color: #74695d; font-size: .75rem; text-align: center; }
+        .form-status { min-height: 1.5rem; margin: .7rem 0 0; color: var(--color-green); font-weight: 700; text-align: center; }
+
+        /* Rodapé */
+        .footer { padding: 2.5rem 0; border-top: 1px solid rgba(255,255,255,.12); background: var(--color-ink); color: #a99f91; }
+        .footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+        .footer .logo { color: var(--color-white); }
+        .footer p { margin: 0; font-size: .8rem; }
+
+        /* Animação progressiva */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+        .reveal.is-visible { opacity: 1; transform: none; }
+
+        @media (max-width: 900px) {
+            .menu-toggle { display: grid; place-items: center; }
+            .nav__links {
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background: var(--color-ink);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity var(--transition);
+            }
+            .nav__links.is-open { z-index: 40; opacity: 1; pointer-events: auto; }
+            .nav__links a:not(.button) { font-family: var(--font-display); font-size: 2rem; }
+            .menu-toggle { position: relative; z-index: 50; }
+            .hero { min-height: auto; padding-bottom: 5rem; }
+            .hero__grid, .section-heading, .process__layout, .story__grid, .honey__grid, .area__card, .contact__grid {
+                grid-template-columns: 1fr;
+            }
+            .hero__visual { min-height: 380px; }
+            .hero__sun { width: 330px; }
+            .buddy { width: 260px; }
+            .hero__trust { position: relative; right: auto; bottom: auto; margin-top: 2.5rem; flex-wrap: wrap; }
+            .section-heading { align-items: start; }
+            .service-grid { grid-template-columns: 1fr 1fr; }
+            .process__sticky { position: static; }
+            .story__grid { gap: 3rem; }
+            .story__art { min-height: 500px; order: 2; }
+            .honey-jar { margin-top: 3rem; }
+            .area__copy { padding-bottom: 3rem; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: clamp(3.3rem, 17vw, 5rem); }
+            .nav { min-height: 78px; }
+            .logo__mark { width: 36px; height: 36px; }
+            .hero { padding-top: 8.5rem; }
+            .hero__visual { min-height: 330px; }
+            .hero__sun { width: 270px; }
+            .buddy { width: 220px; }
+            .buddy-badge { right: .5rem; bottom: 1rem; }
+            .service-grid { grid-template-columns: 1fr; }
+            .service-card { min-height: 280px; }
+            .honey__facts { grid-template-columns: 1fr; }
+            .honey__fact { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+            .story__art { min-height: 420px; }
+            .story__stamp { width: 108px; font-size: .9rem; }
+            .price-row {
+                grid-template-columns: 1fr;
+                gap: .55rem;
+                align-items: start;
+            }
+            .price-row__value { text-align: left; }
+            .contact-link { display: grid; justify-content: start; }
+            .footer__inner { align-items: flex-start; flex-direction: column; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav">
+            <a class="logo" href="#home" aria-label="ComBEEnation home">
+                <span class="logo__mark" aria-hidden="true">🐝</span>
+                <span>Com<strong>BEE</strong>nation</span>
+            </a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Open navigation menu">☰</button>
+            <nav class="nav__links" id="main-menu" aria-label="Main navigation">
+                <a href="#services">Services</a>
+                <a href="#process">How it works</a>
+                <a href="#story">Our story</a>
+                <a href="#honey">Local honey</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <div class="language-switcher" aria-label="Choose language">
+                    <button type="button" data-language="en" aria-pressed="true">EN</button>
+                    <button type="button" data-language="es" aria-pressed="false">ES</button>
+                    <button type="button" data-language="pt" aria-pressed="false">PT</button>
+                </div>
+                <a class="button button--light" href="tel:+19547935366">Call 954-793-5366</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero__grid">
+                <div class="hero__copy">
+                    <p class="eyebrow">Humane bee removal · South Florida</p>
+                    <h1>Saving bees.<br><span>Protecting homes.</span></h1>
+                    <p class="hero__lede">We safely remove and relocate honeybee colonies, giving every hive a second chance to thrive. Family-run, bee-first, and serving all of South Florida.</p>
+                    <div class="hero__actions">
+                        <a class="button" href="#contact">Request bee removal <span class="button__arrow" aria-hidden="true">→</span></a>
+                        <a class="button button--outline" href="#honey">Order local honey</a>
+                    </div>
+                </div>
+                <div class="hero__visual" aria-label="Buddy, the ComBEEnation mascot">
+                    <div class="hero__sun" aria-hidden="true"></div>
+                    <img class="buddy" src="data:image/webp;base64,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" alt="Buddy, a black and white rescue dog and ComBEEnation mascot">
+                    <div class="buddy-badge">
+                        <strong>Meet Buddy</strong>
+                        <span>Chief Bee Buddy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container hero__trust" aria-label="Service qualities">
+                <span>Live relocation</span>
+                <span>Family owned</span>
+                <span>Bee health first</span>
+            </div>
+        </section>
+
+        <div class="purpose-strip" aria-hidden="true">
+            <div class="purpose-strip__track">
+                <div class="purpose-strip__item">Saving Bees. Producing Honey.</div>
+                <div class="purpose-strip__item">No Extermination</div>
+                <div class="purpose-strip__item">Local South Florida Honey</div>
+                <div class="purpose-strip__item">A New Home for Every Hive</div>
+                <div class="purpose-strip__item">Saving Bees. Producing Honey.</div>
+                <div class="purpose-strip__item">No Extermination</div>
+                <div class="purpose-strip__item">Local South Florida Honey</div>
+                <div class="purpose-strip__item">A New Home for Every Hive</div>
+            </div>
+        </div>
+
+        <section class="services" id="services">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div>
+                        <p class="eyebrow">What we do</p>
+                        <h2>Good for your property. Better for the bees.</h2>
+                    </div>
+                    <p class="section-intro">Bee problems need more than pest control. Our careful, hands-on approach protects your space while preserving the colony whenever removal is possible.</p>
+                </div>
+                <div class="service-grid">
+                    <article class="service-card reveal">
+                        <span class="service-card__icon" aria-hidden="true">🐝</span>
+                        <span class="service-card__number">SERVICE 01</span>
+                        <h3>Live bee removal</h3>
+                        <p>Safe removal of honeybees from homes, businesses, trees, irrigation boxes and other challenging spaces.</p>
+                    </article>
+                    <article class="service-card reveal">
+                        <span class="service-card__icon" aria-hidden="true">⌂</span>
+                        <span class="service-card__number">SERVICE 02</span>
+                        <h3>Hive relocation</h3>
+                        <p>We move the rescued colony into a proper hive and relocate it to one of our managed apiaries.</p>
+                    </article>
+                    <article class="service-card reveal">
+                        <span class="service-card__icon" aria-hidden="true">↝</span>
+                        <span class="service-card__number">SERVICE 03</span>
+                        <h3>Swarm removal</h3>
+                        <p>Quick assessment and collection before a temporary swarm establishes itself inside a structure.</p>
+                    </article>
+                    <article class="service-card reveal">
+                        <span class="service-card__icon" aria-hidden="true">✦</span>
+                        <span class="service-card__number">SERVICE 04</span>
+                        <h3>Apiary care</h3>
+                        <p>Thoughtful hive inspections, feeding and health-focused care for small private apiaries.</p>
+                    </article>
+                    <article class="service-card reveal">
+                        <span class="service-card__icon" aria-hidden="true">●</span>
+                        <span class="service-card__number">SERVICE 05</span>
+                        <h3>Local raw honey</h3>
+                        <p>Small-batch South Florida honey, kept as close to the hive as possible and available by request.</p>
+                    </article>
+                    <article class="service-card reveal">
+                        <span class="service-card__icon" aria-hidden="true">?</span>
+                        <span class="service-card__number">NOT SURE?</span>
+                        <h3>Send us a photo</h3>
+                        <p>Tell us where the bees are located. We will review the situation and help you choose a safe next step.</p>
+                    </article>
+                </div>
+                <div class="thermal reveal">
+                    <svg class="thermal__icon" viewBox="0 0 100 100" aria-hidden="true">
+                        <rect x="14" y="26" width="72" height="48" rx="9" fill="none" stroke="#f6b719" stroke-width="5" />
+                        <circle cx="50" cy="50" r="13" fill="none" stroke="#f6b719" stroke-width="5" />
+                        <circle cx="50" cy="50" r="4" fill="#db3b2f" />
+                        <path d="M70 34 h8" stroke="#db3b2f" stroke-width="5" stroke-linecap="round" />
+                    </svg>
+                    <p><strong>Thermal imaging mapping.</strong> We find the exact spot of the colony behind your wall before opening anything - smaller openings, faster work, calmer bees.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="process" id="process">
+            <div class="container process__layout">
+                <div class="process__sticky reveal">
+                    <p class="eyebrow">A kinder way</p>
+                    <h2>From unwanted guests to a thriving hive.</h2>
+                    <p>We never treat a living colony like a disposable problem. Our work starts with understanding the situation and ends with ongoing care.</p>
+                </div>
+                <div class="steps">
+                    <article class="step reveal">
+                        <div>
+                            <h3>Tell us what you see</h3>
+                            <p>Call or send details and photos. We assess the location, colony activity and accessibility before recommending the right approach.</p>
+                        </div>
+                    </article>
+                    <article class="step reveal">
+                        <div>
+                            <h3>We remove with care</h3>
+                            <p>The bees, comb and queen are carefully collected whenever conditions allow, with attention to both colony welfare and your property.</p>
+                        </div>
+                    </article>
+                    <article class="step reveal">
+                        <div>
+                            <h3>The colony gets a new home</h3>
+                            <p>Rescued bees are moved to a managed apiary, placed in a clean hive and supported with inspection, feeding and treatment as needed.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="story" id="story">
+            <div class="container story__grid">
+                <div class="story__art reveal" aria-label="The House of Buddy Bees">
+                    <img class="buddy" src="data:image/webp;base64,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" alt="Buddy, the rescue dog who inspired Buddy Bees Honey">
+                    <div class="story__stamp">Buddy Bees Honey</div>
+                </div>
+                <div class="story__copy reveal">
+                    <p class="eyebrow">Our story</p>
+                    <h2>Rescue has always been in our nature.</h2>
+                    <p>Long before the first hive, our family was taking in dogs and cats that needed another chance. When we found an abandoned apiary in 2024, caring for those struggling colonies felt like a natural continuation of that story.</p>
+                    <p>What began with a handful of weak, pest-affected hives has grown through patient care, research and many long days in the Florida heat. Today, ComBEEnation rescues bees, manages healthy apiaries and shares the honey they can safely spare.</p>
+                    <blockquote class="quote">“We take care of them the way we would care for any other animal. Their health and well-being come first.”</blockquote>
+                    <p>Buddy, one of our beloved rescue dogs, became the heart of Buddy Bees Honey and a reminder that every living thing deserves compassion.</p>
+                    <div class="values" aria-label="Our values">
+                        <span class="value">Compassion</span>
+                        <span class="value">Responsible care</span>
+                        <span class="value">Local production</span>
+                        <span class="value">Family craft</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="honey-section" id="honey">
+            <div class="container honey__grid">
+                <div class="honey__copy reveal">
+                    <p class="eyebrow">Buddy Bees Honey</p>
+                    <h2>A little sweetness from a well-cared-for hive.</h2>
+                    <p>Our small-batch honey comes from South Florida colonies we inspect and nurture throughout the year. We harvest responsibly, leaving the bees what they need before taking anything for ourselves.</p>
+                    <div class="honey__facts">
+                        <div class="honey__fact"><strong>Local</strong><span>South Florida</span></div>
+                        <div class="honey__fact"><strong>Raw</strong><span>Minimal handling</span></div>
+                        <div class="honey__fact"><strong>Small batch</strong><span>Limited harvest</span></div>
+                    </div>
+                    <a class="button" href="mailto:comBEEnationFL@gmail.com?subject=Buddy%20Bees%20Honey%20Order&body=Hi%20ComBEEnation%2C%0A%0AI%20would%20like%20to%20order%20local%20honey.%0A%0AName%3A%0AQuantity%3A%0ACity%3A">Order Buddy Bees Honey <span class="button__arrow" aria-hidden="true">→</span></a>
+                </div>
+                <div class="honey-jar reveal" aria-label="Illustration of a Buddy Bees Honey jar">
+                    <div class="jar-label">
+                        <small>The House of</small>
+                        <strong>Buddy Bees</strong>
+                        <span>Local South Florida Honey</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="area" id="area">
+            <div class="container">
+                <div class="area__card reveal">
+                    <div class="area__copy">
+                        <p class="eyebrow">Where we work</p>
+                        <h2>Serving all of South Florida.</h2>
+                        <p>From Broward and Miami-Dade to Palm Beach and surrounding communities, we help homeowners, businesses and organizations find a humane solution to bee colonies and swarms.</p>
+                        <a class="button button--light" href="tel:+19547935366">Check availability <span class="button__arrow" aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="area__map" aria-label="South Florida service area">
+                        <div class="florida" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="pricing__head reveal">
+                    <p class="eyebrow">Honest pricing</p>
+                    <h2>No surprises. Ever.</h2>
+                    <p class="section-intro">Every removal is different, but you will always know the price before we touch a single bee - in writing, valid for 30 days.</p>
+                </div>
+                <div class="price-list">
+                    <article class="price-row reveal">
+                        <div class="price-row__copy">
+                            <h3>Inspection &amp; thermal mapping</h3>
+                            <p>On-site assessment, honeybee identification, safety preparation and thermal imaging to locate the colony.</p>
+                        </div>
+                        <div class="price-row__value">$50</div>
+                    </article>
+                    <article class="price-row reveal">
+                        <div class="price-row__copy">
+                            <h3>Swarm / colony removal &amp; clean-up</h3>
+                            <p>Bees, combs and honey removed with specialized vacuum equipment. Stray bees vacuumed, honey cleaned to prevent mold.</p>
+                        </div>
+                        <div class="price-row__value"><small>from</small>$300</div>
+                    </article>
+                    <article class="price-row reveal">
+                        <div class="price-row__copy">
+                            <h3>Structural opening</h3>
+                            <p>Opening drywall, siding or flooring to reach the hive cavity, when the colony lives inside the structure.</p>
+                        </div>
+                        <div class="price-row__value"><small>from</small>$150</div>
+                    </article>
+                </div>
+                <p class="price-note reveal">Construction repair/restoration after the removal is not included. Prices may change if the scope or conditions change - you approve everything first. Payment by cash or Zelle.</p>
+                <div class="price-cta reveal">
+                    <a class="button" href="tel:+19547935366">Get your written estimate <span class="button__arrow" aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div>
+                        <p class="eyebrow">Good questions</p>
+                        <h2>Things people ask us</h2>
+                    </div>
+                    <p class="section-intro">Clear answers about live removal, what happens to the bees, and how our work differs from pest control.</p>
+                </div>
+                <div class="faq__list">
+                    <details class="reveal">
+                        <summary>Do you kill the bees?</summary>
+                        <p>Never. Not one, not with chemicals, not "just this once". If a colony can't be removed safely, we would rather turn the job down than harm the bees.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Where do the bees go?</summary>
+                        <p>To our apiaries in Davie - certified and inspected by the Florida Department of Agriculture. There they're nursed back to strength and become part of our local honey production.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Why not just call pest control?</summary>
+                        <p>Spraying a colony leaves poisoned honey and dead brood rotting inside your wall - and the queen's pheromone keeps attracting new swarms to the same spot. Removal solves the problem; extermination hides it.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Will the bees come back?</summary>
+                        <p>Honest answer: the scent left behind can attract scout bees. We remove the combs and honey, clean the area, and show you exactly which entry points to seal so a new swarm doesn't move in.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Can I buy your honey now?</summary>
+                        <p>Almost! Our first commercial harvest is on the way. Text or email us to join the Buddy Bees Honey waitlist and you'll be first in line.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="container contact__grid">
+                <div class="reveal">
+                    <p class="eyebrow">Let’s save this hive</p>
+                    <h2>See bees? Start here.</h2>
+                    <p class="contact__lede">Keep a safe distance, avoid spraying the colony and contact us. A photo and a description of where the bees are entering will help us assess the situation.</p>
+                    <div class="contact__options">
+                        <a class="contact-link" href="tel:+19547935366"><span>Call or text</span><strong>954-793-5366 ↗</strong></a>
+                        <a class="contact-link" href="mailto:comBEEnationFL@gmail.com"><span>Email</span><strong>comBEEnationFL@gmail.com ↗</strong></a>
+                    </div>
+                </div>
+                <form class="request-card reveal" id="request-form">
+                    <h3>Request an assessment</h3>
+                    <p>Complete the details below and your email app will prepare a message to our team.</p>
+                    <div class="field">
+                        <label for="name">Your name</label>
+                        <input id="name" name="name" autocomplete="name" required>
+                    </div>
+                    <div class="field">
+                        <label for="phone">Phone number</label>
+                        <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+                    </div>
+                    <div class="field">
+                        <label for="need">How can we help?</label>
+                        <select id="need" name="need">
+                            <option>Live bee removal</option>
+                            <option>Swarm removal</option>
+                            <option>Apiary care</option>
+                            <option>Order local honey</option>
+                            <option>Something else</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="location">City / ZIP code</label>
+                        <input id="location" name="location" autocomplete="postal-code" required>
+                    </div>
+                    <div class="field">
+                        <label for="message">Where are the bees located?</label>
+                        <textarea id="message" name="message" placeholder="For example: entering through the roof line above the garage"></textarea>
+                    </div>
+                    <button class="button" type="submit">Prepare request <span class="button__arrow" aria-hidden="true">→</span></button>
+                    <p class="form-note">For urgent situations, call 954-793-5366.</p>
+                    <p class="form-status" id="form-status" role="status"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <a class="logo" href="#home">
+                <span class="logo__mark" aria-hidden="true">🐝</span>
+                <span>Com<strong>BEE</strong>nation</span>
+            </a>
+            <p>Saving Bees. Producing Honey. · South Florida · © <span id="year"></span> ComBEEnation</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            es: {
+                "Services": "Servicios",
+                "How it works": "Cómo funciona",
+                "Our story": "Nuestra historia",
+                "Local honey": "Miel local",
+                "Pricing": "Precios",
+                "FAQ": "Preguntas",
+                "Call 954-793-5366": "Llame al 954-793-5366",
+                "Humane bee removal · South Florida": "Remoción humanitaria de abejas · Sur de Florida",
+                "Saving bees.": "Salvando abejas.",
+                "Protecting homes.": "Protegiendo hogares.",
+                "We safely remove and relocate honeybee colonies, giving every hive a second chance to thrive. Family-run, bee-first, and serving all of South Florida.": "Retiramos y reubicamos colonias de abejas de forma segura, dando a cada colmena una segunda oportunidad para prosperar. Somos una empresa familiar, priorizamos a las abejas y atendemos todo el sur de Florida.",
+                "Request bee removal": "Solicitar remoción",
+                "Order local honey": "Pedir miel local",
+                "Meet Buddy": "Conoce a Buddy",
+                "Chief Bee Buddy": "Jefe de las abejas",
+                "Live relocation": "Reubicación con vida",
+                "Family owned": "Empresa familiar",
+                "Bee health first": "La salud de las abejas primero",
+                "Saving Bees. Producing Honey.": "Salvando abejas. Produciendo miel.",
+                "No Extermination": "Sin exterminio",
+                "Local South Florida Honey": "Miel local del sur de Florida",
+                "A New Home for Every Hive": "Un nuevo hogar para cada colmena",
+                "What we do": "Lo que hacemos",
+                "Good for your property. Better for the bees.": "Bueno para su propiedad. Mejor para las abejas.",
+                "Bee problems need more than pest control. Our careful, hands-on approach protects your space while preserving the colony whenever removal is possible.": "Los problemas con abejas requieren más que control de plagas. Nuestro enfoque cuidadoso protege su espacio y preserva la colonia siempre que sea posible retirarla.",
+                "SERVICE 01": "SERVICIO 01",
+                "SERVICE 02": "SERVICIO 02",
+                "SERVICE 03": "SERVICIO 03",
+                "SERVICE 04": "SERVICIO 04",
+                "SERVICE 05": "SERVICIO 05",
+                "NOT SURE?": "¿NO ESTÁ SEGURO?",
+                "Live bee removal": "Remoción de abejas vivas",
+                "Safe removal of honeybees from homes, businesses, trees, irrigation boxes and other challenging spaces.": "Retiro seguro de abejas en hogares, comercios, árboles, cajas de riego y otros espacios difíciles.",
+                "Hive relocation": "Reubicación de colmenas",
+                "We move the rescued colony into a proper hive and relocate it to one of our managed apiaries.": "Trasladamos la colonia rescatada a una colmena adecuada y la llevamos a uno de nuestros apiarios.",
+                "Swarm removal": "Remoción de enjambres",
+                "Quick assessment and collection before a temporary swarm establishes itself inside a structure.": "Evaluación y recolección rápida antes de que un enjambre temporal se establezca dentro de una estructura.",
+                "Apiary care": "Cuidado de apiarios",
+                "Thoughtful hive inspections, feeding and health-focused care for small private apiaries.": "Inspecciones, alimentación y cuidados centrados en la salud para pequeños apiarios privados.",
+                "Local raw honey": "Miel local cruda",
+                "Small-batch South Florida honey, kept as close to the hive as possible and available by request.": "Miel del sur de Florida en pequeños lotes, con mínima manipulación y disponible por pedido.",
+                "Send us a photo": "Envíenos una foto",
+                "Tell us where the bees are located. We will review the situation and help you choose a safe next step.": "Díganos dónde están las abejas. Revisaremos la situación y le ayudaremos a elegir el siguiente paso más seguro.",
+                "Thermal imaging mapping.": "Mapeo con imagen térmica.",
+                "We find the exact spot of the colony behind your wall before opening anything - smaller openings, faster work, calmer bees.": "Encontramos el punto exacto de la colonia detrás de su pared antes de abrir nada - aberturas más pequeñas, trabajo más rápido, abejas más tranquilas.",
+                "A kinder way": "Una forma más amable",
+                "From unwanted guests to a thriving hive.": "De visitantes inesperados a una colmena próspera.",
+                "We never treat a living colony like a disposable problem. Our work starts with understanding the situation and ends with ongoing care.": "Nunca tratamos una colonia viva como un problema desechable. Nuestro trabajo comienza entendiendo la situación y termina con cuidados continuos.",
+                "Tell us what you see": "Cuéntenos lo que ve",
+                "Call or send details and photos. We assess the location, colony activity and accessibility before recommending the right approach.": "Llámenos o envíe detalles y fotos. Evaluamos el lugar, la actividad de la colonia y el acceso antes de recomendar el enfoque adecuado.",
+                "We remove with care": "Retiramos con cuidado",
+                "The bees, comb and queen are carefully collected whenever conditions allow, with attention to both colony welfare and your property.": "Recolectamos cuidadosamente las abejas, el panal y la reina cuando las condiciones lo permiten, protegiendo la colonia y su propiedad.",
+                "The colony gets a new home": "La colonia recibe un nuevo hogar",
+                "Rescued bees are moved to a managed apiary, placed in a clean hive and supported with inspection, feeding and treatment as needed.": "Las abejas rescatadas se trasladan a un apiario, se instalan en una colmena limpia y reciben inspección, alimentación y tratamiento según sea necesario.",
+                "Rescue has always been in our nature.": "Rescatar siempre ha sido parte de nuestra naturaleza.",
+                "Long before the first hive, our family was taking in dogs and cats that needed another chance. When we found an abandoned apiary in 2024, caring for those struggling colonies felt like a natural continuation of that story.": "Mucho antes de la primera colmena, nuestra familia ya acogía perros y gatos que necesitaban otra oportunidad. Cuando encontramos un apiario abandonado en 2024, cuidar aquellas colonias fue la continuación natural de esa historia.",
+                "What began with a handful of weak, pest-affected hives has grown through patient care, research and many long days in the Florida heat. Today, ComBEEnation rescues bees, manages healthy apiaries and shares the honey they can safely spare.": "Lo que comenzó con unas pocas colmenas débiles y afectadas por plagas creció con cuidados pacientes, investigación y largos días bajo el calor de Florida. Hoy, ComBEEnation rescata abejas, mantiene apiarios saludables y comparte la miel que pueden producir sin riesgo.",
+                "“We take care of them the way we would care for any other animal. Their health and well-being come first.”": "“Las cuidamos como cuidaríamos a cualquier otro animal. Su salud y bienestar son lo primero.”",
+                "Buddy, one of our beloved rescue dogs, became the heart of Buddy Bees Honey and a reminder that every living thing deserves compassion.": "Buddy, uno de nuestros queridos perros rescatados, se convirtió en el corazón de Buddy Bees Honey y en un recordatorio de que todo ser vivo merece compasión.",
+                "Compassion": "Compasión",
+                "Responsible care": "Cuidado responsable",
+                "Local production": "Producción local",
+                "Family craft": "Trabajo familiar",
+                "Buddy Bees Honey": "Miel Buddy Bees",
+                "A little sweetness from a well-cared-for hive.": "Un poco de dulzura de una colmena bien cuidada.",
+                "Our small-batch honey comes from South Florida colonies we inspect and nurture throughout the year. We harvest responsibly, leaving the bees what they need before taking anything for ourselves.": "Nuestra miel en pequeños lotes proviene de colonias del sur de Florida que inspeccionamos y cuidamos durante todo el año. Cosechamos responsablemente, dejando primero a las abejas todo lo que necesitan.",
+                "Local": "Local",
+                "South Florida": "Sur de Florida",
+                "Raw": "Cruda",
+                "Minimal handling": "Mínima manipulación",
+                "Small batch": "Lote pequeño",
+                "Limited harvest": "Cosecha limitada",
+                "Order Buddy Bees Honey": "Pedir miel Buddy Bees",
+                "The House of": "La casa de",
+                "Where we work": "Dónde trabajamos",
+                "Serving all of South Florida.": "Atendemos todo el sur de Florida.",
+                "From Broward and Miami-Dade to Palm Beach and surrounding communities, we help homeowners, businesses and organizations find a humane solution to bee colonies and swarms.": "Desde Broward y Miami-Dade hasta Palm Beach y comunidades cercanas, ayudamos a propietarios, empresas y organizaciones a encontrar una solución humanitaria para colonias y enjambres.",
+                "Check availability": "Consultar disponibilidad",
+                "Good questions": "Buenas preguntas",
+                "Things people ask us": "Lo que la gente nos pregunta",
+                "Clear answers about live removal, what happens to the bees, and how our work differs from pest control.": "Respuestas claras sobre remoción en vivo, qué pasa con las abejas y cómo nuestro trabajo se diferencia del control de plagas.",
+                "Do you kill the bees?": "¿Matan a las abejas?",
+                "Never. Not one, not with chemicals, not \"just this once\". If a colony can't be removed safely, we would rather turn the job down than harm the bees.": "Nunca. Ni una, ni con químicos, ni \"solo esta vez\". Si una colonia no puede retirarse con seguridad, preferimos rechazar el trabajo antes que dañar a las abejas.",
+                "Where do the bees go?": "¿A dónde van las abejas?",
+                "To our apiaries in Davie - certified and inspected by the Florida Department of Agriculture. There they're nursed back to strength and become part of our local honey production.": "A nuestros apiarios en Davie - certificados e inspeccionados por el Departamento de Agricultura de Florida. Allí recuperan su fuerza y pasan a formar parte de nuestra producción de miel local.",
+                "Why not just call pest control?": "¿Por qué no llamar al control de plagas?",
+                "Spraying a colony leaves poisoned honey and dead brood rotting inside your wall - and the queen's pheromone keeps attracting new swarms to the same spot. Removal solves the problem; extermination hides it.": "Fumigar una colonia deja miel envenenada y crías muertas pudriéndose dentro de su pared - y la feromona de la reina sigue atrayendo nuevos enjambres al mismo lugar. La remoción resuelve el problema; el exterminio lo esconde.",
+                "Will the bees come back?": "¿Volverán las abejas?",
+                "Honest answer: the scent left behind can attract scout bees. We remove the combs and honey, clean the area, and show you exactly which entry points to seal so a new swarm doesn't move in.": "Respuesta honesta: el olor que queda puede atraer abejas exploradoras. Retiramos los panales y la miel, limpiamos el área y le mostramos exactamente qué entradas sellar para que un nuevo enjambre no se instale.",
+                "Can I buy your honey now?": "¿Puedo comprar su miel ahora?",
+                "Almost! Our first commercial harvest is on the way. Text or email us to join the Buddy Bees Honey waitlist and you'll be first in line.": "¡Casi! Nuestra primera cosecha comercial está en camino. Escríbanos por mensaje o correo para unirse a la lista de espera de Buddy Bees Honey y será de los primeros.",
+                "Honest pricing": "Precios honestos",
+                "No surprises. Ever.": "Sin sorpresas. Nunca.",
+                "Every removal is different, but you will always know the price before we touch a single bee - in writing, valid for 30 days.": "Cada remoción es diferente, pero usted siempre sabrá el precio antes de que toquemos una sola abeja - por escrito, válido por 30 días.",
+                "Inspection & thermal mapping": "Inspección y mapeo térmico",
+                "On-site assessment, honeybee identification, safety preparation and thermal imaging to locate the colony.": "Evaluación en sitio, identificación de las abejas, preparación de seguridad e imagen térmica para localizar la colonia.",
+                "Swarm / colony removal & clean-up": "Remoción de enjambre / colonia y limpieza",
+                "Bees, combs and honey removed with specialized vacuum equipment. Stray bees vacuumed, honey cleaned to prevent mold.": "Abejas, panales y miel retirados con equipo de aspiración especializado. Abejas sueltas aspiradas y miel limpiada para prevenir moho.",
+                "Structural opening": "Apertura estructural",
+                "Opening drywall, siding or flooring to reach the hive cavity, when the colony lives inside the structure.": "Apertura de drywall, revestimiento o piso para alcanzar la cavidad de la colmena, cuando la colonia vive dentro de la estructura.",
+                "from": "desde",
+                "Construction repair/restoration after the removal is not included. Prices may change if the scope or conditions change - you approve everything first. Payment by cash or Zelle.": "La reparación/restauración de la construcción después de la remoción no está incluida. Los precios pueden cambiar si cambia el alcance o las condiciones - usted aprueba todo primero. Pago en efectivo o Zelle.",
+                "Get your written estimate": "Pida su presupuesto por escrito",
+                "Let’s save this hive": "Salvemos esta colmena",
+                "See bees? Start here.": "¿Ve abejas? Comience aquí.",
+                "Keep a safe distance, avoid spraying the colony and contact us. A photo and a description of where the bees are entering will help us assess the situation.": "Mantenga una distancia segura, no rocíe la colonia y contáctenos. Una foto y una descripción del lugar por donde entran las abejas nos ayudarán a evaluar la situación.",
+                "Call or text": "Llame o envíe mensaje",
+                "Email": "Correo electrónico",
+                "Request an assessment": "Solicitar una evaluación",
+                "Complete the details below and your email app will prepare a message to our team.": "Complete los datos y su aplicación de correo preparará un mensaje para nuestro equipo.",
+                "Your name": "Su nombre",
+                "Phone number": "Teléfono",
+                "How can we help?": "¿Cómo podemos ayudar?",
+                "Order local honey": "Pedir miel local",
+                "Something else": "Otra necesidad",
+                "City / ZIP code": "Ciudad / código postal",
+                "Where are the bees located?": "¿Dónde están las abejas?",
+                "Prepare request": "Preparar solicitud",
+                "For urgent situations, call 954-793-5366.": "Para situaciones urgentes, llame al 954-793-5366.",
+                "Opening your email app…": "Abriendo su aplicación de correo…",
+                "Saving Bees. Producing Honey. · South Florida · ©": "Salvando abejas. Produciendo miel. · Sur de Florida · ©"
+            },
+            pt: {
+                "Services": "Serviços",
+                "How it works": "Como funciona",
+                "Our story": "Nossa história",
+                "Local honey": "Mel local",
+                "Pricing": "Preços",
+                "FAQ": "Dúvidas",
+                "Call 954-793-5366": "Ligue 954-793-5366",
+                "Humane bee removal · South Florida": "Remoção humanitária de abelhas · Sul da Flórida",
+                "Saving bees.": "Salvando abelhas.",
+                "Protecting homes.": "Protegendo lares.",
+                "We safely remove and relocate honeybee colonies, giving every hive a second chance to thrive. Family-run, bee-first, and serving all of South Florida.": "Removemos e realocamos colônias de abelhas com segurança, dando a cada colmeia uma nova chance de prosperar. Uma empresa familiar, com as abelhas em primeiro lugar, atendendo todo o sul da Flórida.",
+                "Request bee removal": "Solicitar remoção",
+                "Order local honey": "Pedir mel local",
+                "Meet Buddy": "Conheça o Buddy",
+                "Chief Bee Buddy": "Chefe das abelhas",
+                "Live relocation": "Realocação com vida",
+                "Family owned": "Empresa familiar",
+                "Bee health first": "Saúde das abelhas primeiro",
+                "Saving Bees. Producing Honey.": "Salvando abelhas. Produzindo mel.",
+                "No Extermination": "Sem extermínio",
+                "Local South Florida Honey": "Mel local do sul da Flórida",
+                "A New Home for Every Hive": "Um novo lar para cada colmeia",
+                "What we do": "O que fazemos",
+                "Good for your property. Better for the bees.": "Bom para sua propriedade. Melhor para as abelhas.",
+                "Bee problems need more than pest control. Our careful, hands-on approach protects your space while preserving the colony whenever removal is possible.": "Problemas com abelhas exigem mais do que controle de pragas. Nossa abordagem cuidadosa protege seu espaço e preserva a colônia sempre que a remoção é possível.",
+                "SERVICE 01": "SERVIÇO 01",
+                "SERVICE 02": "SERVIÇO 02",
+                "SERVICE 03": "SERVIÇO 03",
+                "SERVICE 04": "SERVIÇO 04",
+                "SERVICE 05": "SERVIÇO 05",
+                "NOT SURE?": "NÃO TEM CERTEZA?",
+                "Live bee removal": "Remoção de abelhas vivas",
+                "Safe removal of honeybees from homes, businesses, trees, irrigation boxes and other challenging spaces.": "Remoção segura de abelhas em residências, empresas, árvores, caixas de irrigação e outros espaços desafiadores.",
+                "Hive relocation": "Realocação de colmeias",
+                "We move the rescued colony into a proper hive and relocate it to one of our managed apiaries.": "Transferimos a colônia resgatada para uma colmeia adequada e a levamos para um de nossos apiários.",
+                "Swarm removal": "Remoção de enxames",
+                "Quick assessment and collection before a temporary swarm establishes itself inside a structure.": "Avaliação e coleta rápidas antes que um enxame temporário se estabeleça dentro de uma estrutura.",
+                "Apiary care": "Cuidado de apiários",
+                "Thoughtful hive inspections, feeding and health-focused care for small private apiaries.": "Inspeções, alimentação e cuidados voltados à saúde de pequenos apiários particulares.",
+                "Local raw honey": "Mel local cru",
+                "Small-batch South Florida honey, kept as close to the hive as possible and available by request.": "Mel do sul da Flórida em pequenos lotes, com mínima manipulação e disponível por encomenda.",
+                "Send us a photo": "Envie uma foto",
+                "Tell us where the bees are located. We will review the situation and help you choose a safe next step.": "Conte onde estão as abelhas. Analisaremos a situação e ajudaremos você a escolher o próximo passo mais seguro.",
+                "Thermal imaging mapping.": "Mapeamento com imagem térmica.",
+                "We find the exact spot of the colony behind your wall before opening anything - smaller openings, faster work, calmer bees.": "Encontramos o ponto exato da colônia atrás da sua parede antes de abrir qualquer coisa - aberturas menores, trabalho mais rápido, abelhas mais calmas.",
+                "A kinder way": "Uma forma mais gentil",
+                "From unwanted guests to a thriving hive.": "De visitantes indesejados a uma colmeia próspera.",
+                "We never treat a living colony like a disposable problem. Our work starts with understanding the situation and ends with ongoing care.": "Nunca tratamos uma colônia viva como um problema descartável. Nosso trabalho começa entendendo a situação e termina com cuidado contínuo.",
+                "Tell us what you see": "Conte o que você vê",
+                "Call or send details and photos. We assess the location, colony activity and accessibility before recommending the right approach.": "Ligue ou envie detalhes e fotos. Avaliamos o local, a atividade da colônia e o acesso antes de recomendar a abordagem adequada.",
+                "We remove with care": "Removemos com cuidado",
+                "The bees, comb and queen are carefully collected whenever conditions allow, with attention to both colony welfare and your property.": "As abelhas, os favos e a rainha são recolhidos cuidadosamente quando as condições permitem, protegendo a colônia e sua propriedade.",
+                "The colony gets a new home": "A colônia ganha um novo lar",
+                "Rescued bees are moved to a managed apiary, placed in a clean hive and supported with inspection, feeding and treatment as needed.": "As abelhas resgatadas são levadas para um apiário, instaladas em uma colmeia limpa e recebem inspeção, alimentação e tratamento conforme necessário.",
+                "Rescue has always been in our nature.": "Resgatar sempre esteve em nossa natureza.",
+                "Long before the first hive, our family was taking in dogs and cats that needed another chance. When we found an abandoned apiary in 2024, caring for those struggling colonies felt like a natural continuation of that story.": "Muito antes da primeira colmeia, nossa família já acolhia cães e gatos que precisavam de uma nova chance. Quando encontramos um apiário abandonado em 2024, cuidar daquelas colônias foi uma continuação natural dessa história.",
+                "What began with a handful of weak, pest-affected hives has grown through patient care, research and many long days in the Florida heat. Today, ComBEEnation rescues bees, manages healthy apiaries and shares the honey they can safely spare.": "O que começou com algumas colmeias fracas e afetadas por pragas cresceu com cuidado paciente, pesquisa e muitos dias sob o calor da Flórida. Hoje, a ComBEEnation resgata abelhas, mantém apiários saudáveis e compartilha o mel que elas podem produzir com segurança.",
+                "“We take care of them the way we would care for any other animal. Their health and well-being come first.”": "“Cuidamos delas como cuidaríamos de qualquer outro animal. A saúde e o bem-estar vêm primeiro.”",
+                "Buddy, one of our beloved rescue dogs, became the heart of Buddy Bees Honey and a reminder that every living thing deserves compassion.": "Buddy, um de nossos amados cães resgatados, tornou-se o coração da Buddy Bees Honey e um lembrete de que todo ser vivo merece compaixão.",
+                "Compassion": "Compaixão",
+                "Responsible care": "Cuidado responsável",
+                "Local production": "Produção local",
+                "Family craft": "Trabalho familiar",
+                "Buddy Bees Honey": "Mel Buddy Bees",
+                "A little sweetness from a well-cared-for hive.": "Um pouco de doçura de uma colmeia bem cuidada.",
+                "Our small-batch honey comes from South Florida colonies we inspect and nurture throughout the year. We harvest responsibly, leaving the bees what they need before taking anything for ourselves.": "Nosso mel em pequenos lotes vem de colônias do sul da Flórida que inspecionamos e cuidamos durante todo o ano. Colhemos com responsabilidade, deixando primeiro para as abelhas tudo de que precisam.",
+                "Local": "Local",
+                "South Florida": "Sul da Flórida",
+                "Raw": "Cru",
+                "Minimal handling": "Mínima manipulação",
+                "Small batch": "Pequeno lote",
+                "Limited harvest": "Colheita limitada",
+                "Order Buddy Bees Honey": "Pedir mel Buddy Bees",
+                "The House of": "A casa da",
+                "Where we work": "Onde trabalhamos",
+                "Serving all of South Florida.": "Atendemos todo o sul da Flórida.",
+                "From Broward and Miami-Dade to Palm Beach and surrounding communities, we help homeowners, businesses and organizations find a humane solution to bee colonies and swarms.": "De Broward e Miami-Dade a Palm Beach e comunidades próximas, ajudamos moradores, empresas e organizações a encontrar uma solução humanitária para colônias e enxames.",
+                "Check availability": "Consultar disponibilidade",
+                "Good questions": "Boas perguntas",
+                "Things people ask us": "O que sempre nos perguntam",
+                "Clear answers about live removal, what happens to the bees, and how our work differs from pest control.": "Respostas claras sobre remoção com vida, o destino das abelhas e como nosso trabalho difere do controle de pragas.",
+                "Do you kill the bees?": "Vocês matam as abelhas?",
+                "Never. Not one, not with chemicals, not \"just this once\". If a colony can't be removed safely, we would rather turn the job down than harm the bees.": "Nunca. Nem uma, nem com químicos, nem \"só desta vez\". Se uma colônia não pode ser removida com segurança, preferimos recusar o trabalho a machucar as abelhas.",
+                "Where do the bees go?": "Para onde vão as abelhas?",
+                "To our apiaries in Davie - certified and inspected by the Florida Department of Agriculture. There they're nursed back to strength and become part of our local honey production.": "Para nossos apiários em Davie - certificados e inspecionados pelo Departamento de Agricultura da Flórida. Lá elas recuperam as forças e passam a fazer parte da nossa produção de mel local.",
+                "Why not just call pest control?": "Por que não chamar uma dedetizadora?",
+                "Spraying a colony leaves poisoned honey and dead brood rotting inside your wall - and the queen's pheromone keeps attracting new swarms to the same spot. Removal solves the problem; extermination hides it.": "Dedetizar uma colônia deixa mel envenenado e crias mortas apodrecendo dentro da sua parede - e o feromônio da rainha continua atraindo novos enxames para o mesmo lugar. A remoção resolve o problema; o extermínio esconde.",
+                "Will the bees come back?": "As abelhas vão voltar?",
+                "Honest answer: the scent left behind can attract scout bees. We remove the combs and honey, clean the area, and show you exactly which entry points to seal so a new swarm doesn't move in.": "Resposta honesta: o cheiro que fica pode atrair abelhas exploradoras. Removemos os favos e o mel, limpamos a área e mostramos exatamente quais entradas vedar para que um novo enxame não se instale.",
+                "Can I buy your honey now?": "Já posso comprar o mel?",
+                "Almost! Our first commercial harvest is on the way. Text or email us to join the Buddy Bees Honey waitlist and you'll be first in line.": "Quase! Nossa primeira colheita comercial está a caminho. Mande mensagem ou e-mail para entrar na lista de espera do Buddy Bees Honey e ser um dos primeiros.",
+                "Honest pricing": "Preços honestos",
+                "No surprises. Ever.": "Sem surpresas. Nunca.",
+                "Every removal is different, but you will always know the price before we touch a single bee - in writing, valid for 30 days.": "Cada remoção é diferente, mas você sempre saberá o preço antes de tocarmos numa única abelha - por escrito, válido por 30 dias.",
+                "Inspection & thermal mapping": "Inspeção e mapeamento térmico",
+                "On-site assessment, honeybee identification, safety preparation and thermal imaging to locate the colony.": "Avaliação no local, identificação das abelhas, preparação de segurança e imagem térmica para localizar a colônia.",
+                "Swarm / colony removal & clean-up": "Remoção de enxame / colônia e limpeza",
+                "Bees, combs and honey removed with specialized vacuum equipment. Stray bees vacuumed, honey cleaned to prevent mold.": "Abelhas, favos e mel retirados com aspirador especializado. Abelhas dispersas aspiradas e mel limpo para evitar mofo.",
+                "Structural opening": "Abertura estrutural",
+                "Opening drywall, siding or flooring to reach the hive cavity, when the colony lives inside the structure.": "Abertura de drywall, revestimento ou piso para alcançar a cavidade da colmeia, quando a colônia vive dentro da estrutura.",
+                "from": "a partir de",
+                "Construction repair/restoration after the removal is not included. Prices may change if the scope or conditions change - you approve everything first. Payment by cash or Zelle.": "Reparo/restauração da construção após a remoção não está incluso. Os preços podem mudar se o escopo ou as condições mudarem - você aprova tudo antes. Pagamento em dinheiro ou Zelle.",
+                "Get your written estimate": "Peça seu orçamento por escrito",
+                "Let’s save this hive": "Vamos salvar esta colmeia",
+                "See bees? Start here.": "Viu abelhas? Comece aqui.",
+                "Keep a safe distance, avoid spraying the colony and contact us. A photo and a description of where the bees are entering will help us assess the situation.": "Mantenha uma distância segura, não aplique produtos na colônia e fale conosco. Uma foto e a descrição de onde as abelhas estão entrando nos ajudarão a avaliar a situação.",
+                "Call or text": "Ligue ou envie mensagem",
+                "Email": "E-mail",
+                "Request an assessment": "Solicitar uma avaliação",
+                "Complete the details below and your email app will prepare a message to our team.": "Preencha os dados e seu aplicativo de e-mail preparará uma mensagem para nossa equipe.",
+                "Your name": "Seu nome",
+                "Phone number": "Telefone",
+                "How can we help?": "Como podemos ajudar?",
+                "Order local honey": "Pedir mel local",
+                "Something else": "Outro assunto",
+                "City / ZIP code": "Cidade / CEP",
+                "Where are the bees located?": "Onde estão as abelhas?",
+                "Prepare request": "Preparar solicitação",
+                "For urgent situations, call 954-793-5366.": "Em situações urgentes, ligue para 954-793-5366.",
+                "Opening your email app…": "Abrindo seu aplicativo de e-mail…",
+                "Saving Bees. Producing Honey. · South Florida · ©": "Salvando abelhas. Produzindo mel. · Sul da Flórida · ©"
+            }
+        };
+
+        const originalText = new WeakMap();
+        const translatableAttributes = ["placeholder", "aria-label", "title"];
+
+        function setLanguage(language) {
+            const dictionary = translations[language] || {};
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    return ["SCRIPT", "STYLE"].includes(node.parentElement?.tagName)
+                        ? NodeFilter.FILTER_REJECT
+                        : NodeFilter.FILTER_ACCEPT;
+                }
+            });
+
+            let node;
+            while ((node = walker.nextNode())) {
+                if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+                const source = originalText.get(node);
+                const trimmed = source.trim();
+                if (!trimmed) continue;
+                const translated = dictionary[trimmed] || trimmed;
+                node.nodeValue = source.replace(trimmed, translated);
+            }
+
+            document.querySelectorAll("*").forEach(element => {
+                translatableAttributes.forEach(attribute => {
+                    if (!element.hasAttribute(attribute)) return;
+                    const dataKey = `original${attribute.replace(/(^|-)(\w)/g, (_, __, letter) => letter.toUpperCase())}`;
+                    if (!element.dataset[dataKey]) element.dataset[dataKey] = element.getAttribute(attribute);
+                    const source = element.dataset[dataKey];
+                    element.setAttribute(attribute, dictionary[source] || source);
+                });
+            });
+
+            document.documentElement.lang = language === "pt" ? "pt-BR" : language;
+            document.title = language === "es"
+                ? "ComBEEnation | Salvando abejas en el sur de Florida"
+                : language === "pt"
+                    ? "ComBEEnation | Salvando abelhas no sul da Flórida"
+                    : "ComBEEnation | Saving Bees Across South Florida";
+            document.querySelectorAll("[data-language]").forEach(button => {
+                button.setAttribute("aria-pressed", String(button.dataset.language === language));
+            });
+            localStorage.setItem("combeenation-language", language);
+        }
+
+        document.querySelectorAll("[data-language]").forEach(button => {
+            button.addEventListener("click", () => setLanguage(button.dataset.language));
+        });
+
+        const menuButton = document.querySelector(".menu-toggle");
+        const menu = document.querySelector(".nav__links");
+
+        function closeMenu() {
+            menu.classList.remove("is-open");
+            document.body.classList.remove("menu-open");
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.setAttribute("aria-label", "Open navigation menu");
+            menuButton.textContent = "☰";
+        }
+
+        menuButton.addEventListener("click", () => {
+            const isOpen = menu.classList.toggle("is-open");
+            document.body.classList.toggle("menu-open", isOpen);
+            menuButton.setAttribute("aria-expanded", String(isOpen));
+            menuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+            menuButton.textContent = isOpen ? "×" : "☰";
+        });
+
+        menu.querySelectorAll("a").forEach(link => link.addEventListener("click", closeMenu));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
+        document.getElementById("request-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            const data = new FormData(event.currentTarget);
+            const subject = encodeURIComponent(`${data.get("need")} request from ${data.get("name")}`);
+            const body = encodeURIComponent(
+                `Name: ${data.get("name")}\n` +
+                `Phone: ${data.get("phone")}\n` +
+                `Need: ${data.get("need")}\n` +
+                `City / ZIP: ${data.get("location")}\n\n` +
+                `Details:\n${data.get("message") || "No additional details provided."}`
+            );
+            document.getElementById("form-status").textContent = "Opening your email app…";
+            window.location.href = `mailto:comBEEnationFL@gmail.com?subject=${subject}&body=${body}`;
+        });
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        const savedLanguage = localStorage.getItem("combeenation-language");
+        const browserLanguage = navigator.language.toLowerCase();
+        const initialLanguage = savedLanguage || (browserLanguage.startsWith("pt") ? "pt" : browserLanguage.startsWith("es") ? "es" : "en");
+        setLanguage(initialLanguage);
+    </script>
+</body>
+</html>

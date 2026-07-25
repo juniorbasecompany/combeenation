@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combeenation · O que se passa na cabeça dos donos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --mel: #E59500;
+            --mel-claro: #F4B53F;
+            --mel-palido: #F7E2B0;
+            --escuro: #2B1D0E;
+            --marrom: #5A3E1B;
+            --creme: #FBF4E4;
+            --creme-2: #F5E9CF;
+            --carvao: #1A1208;
+            --linha: #D9C39A;
+            --acento: #B5471E;
+            --verde: #5C6B3A;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--creme);
+            color: var(--escuro);
+            font-family: "Newsreader", Georgia, serif;
+            font-size: 18px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* textura sutil de favo no fundo */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                radial-gradient(circle at 50% 50%, rgba(229, 149, 0, .05) 0 2px, transparent 2px);
+            background-size: 34px 34px;
+            pointer-events: none;
+        }
+
+        a {
+            color: var(--acento);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        /* ====== LAYOUT ====== */
+        .wrap {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            max-width: 1240px;
+            margin: 0 auto;
+            gap: 0
+        }
+
+        nav.toc {
+            position: sticky;
+            top: 0;
+            align-self: start;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 36px 26px 60px;
+            border-right: 1px solid var(--linha);
+            background: linear-gradient(180deg, var(--creme) 0%, var(--creme-2) 100%);
+        }
+
+        nav.toc .brand {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: 1.5rem;
+            line-height: 1.1;
+            color: var(--escuro);
+            letter-spacing: -.01em
+        }
+
+        nav.toc .brand b {
+            color: var(--mel)
+        }
+
+        nav.toc .brand-sub {
+            font-family: "Space Mono", monospace;
+            font-size: .62rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--marrom);
+            margin-top: 8px;
+            display: block
+        }
+
+        nav.toc ol {
+            list-style: none;
+            margin-top: 30px;
+            counter-reset: sec
+        }
+
+        nav.toc li {
+            counter-increment: sec;
+            margin: 2px 0
+        }
+
+        nav.toc a {
+            display: block;
+            color: var(--marrom);
+            font-size: .95rem;
+            padding: 6px 10px 6px 34px;
+            position: relative;
+            border-radius: 6px;
+            transition: background .2s, color .2s
+        }
+
+        nav.toc a::before {
+            content: counter(sec, decimal-leading-zero);
+            position: absolute;
+            left: 8px;
+            font-family: "Space Mono", monospace;
+            font-size: .6rem;
+            color: var(--mel);
+            top: 9px
+        }
+
+        nav.toc a:hover {
+            background: var(--mel-palido);
+            color: var(--escuro);
+            text-decoration: none
+        }
+
+        main {
+            padding: 0 0 120px;
+            min-width: 0
+        }
+
+        /* ====== HERO ====== */
+        header.hero {
+            padding: 90px 60px 70px;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(120% 90% at 90% -10%, rgba(244, 181, 63, .35), transparent 60%),
+                linear-gradient(160deg, var(--escuro) 0%, #3a2913 55%, var(--marrom) 100%);
+            color: var(--creme);
+        }
+
+        header.hero .tag {
+            font-family: "Space Mono", monospace;
+            font-size: .7rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--mel-claro)
+        }
+
+        header.hero h1 {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: clamp(2.6rem, 5vw, 4.3rem);
+            line-height: .98;
+            letter-spacing: -.02em;
+            margin: 18px 0 0
+        }
+
+        header.hero h1 em {
+            font-style: italic;
+            color: var(--mel-claro)
+        }
+
+        header.hero p.lede {
+            font-size: 1.25rem;
+            max-width: 48ch;
+            margin-top: 26px;
+            color: var(--creme-2);
+            line-height: 1.5
+        }
+
+        header.hero .meta {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 26px;
+            font-size: .85rem;
+            color: var(--mel-palido);
+            font-family: "Space Mono", monospace
+        }
+
+        /* hexágono decorativo */
+        .hex-deco {
+            position: absolute;
+            right: -60px;
+            top: -40px;
+            width: 340px;
+            height: 340px;
+            opacity: .18;
+            background: var(--mel);
+            clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+        }
+
+        .hex-deco.two {
+            right: 120px;
+            top: 180px;
+            width: 140px;
+            height: 140px;
+            opacity: .1
+        }
+
+        /* ====== SECTIONS ====== */
+        section {
+            padding: 64px 60px;
+            border-bottom: 1px solid var(--linha);
+            scroll-margin-top: 20px
+        }
+
+        section:nth-of-type(even) {
+            background: rgba(247, 226, 176, .22)
+        }
+
+        .sec-head {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            margin-bottom: 8px
+        }
+
+        .sec-num {
+            font-family: "Space Mono", monospace;
+            font-size: .8rem;
+            color: var(--mel);
+            letter-spacing: .1em;
+            padding-top: 6px
+        }
+
+        h2 {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+            line-height: 1.02;
+            letter-spacing: -.015em;
+            color: var(--escuro)
+        }
+
+        .sec-intro {
+            font-size: 1.15rem;
+            color: var(--marrom);
+            max-width: 62ch;
+            margin: 14px 0 34px;
+            font-style: italic
+        }
+
+        h3 {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--escuro);
+            margin: 30px 0 10px;
+            letter-spacing: -.01em
+        }
+
+        p {
+            max-width: 68ch;
+            margin-bottom: 14px
+        }
+
+        ul.clean {
+            list-style: none;
+            max-width: 68ch;
+            margin: 6px 0 14px
+        }
+
+        ul.clean li {
+            position: relative;
+            padding-left: 26px;
+            margin-bottom: 9px
+        }
+
+        ul.clean li::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 11px;
+            width: 9px;
+            height: 9px;
+            background: var(--mel);
+            clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)
+        }
+
+        strong {
+            color: var(--escuro);
+            font-weight: 600
+        }
+
+        /* cards grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin: 22px 0
+        }
+
+        .card {
+            background: var(--creme);
+            border: 1px solid var(--linha);
+            border-radius: 14px;
+            padding: 22px 22px 24px;
+            box-shadow: 0 1px 0 rgba(90, 62, 27, .04)
+        }
+
+        .card h4 {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: 1.08rem;
+            margin-bottom: 6px;
+            color: var(--escuro);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card h4 .dot {
+            width: 10px;
+            height: 10px;
+            background: var(--mel);
+            border-radius: 50%;
+            flex: 0 0 auto
+        }
+
+        .card p {
+            font-size: .98rem;
+            color: var(--marrom);
+            margin: 0
+        }
+
+        .card.future h4 .dot {
+            background: var(--verde)
+        }
+
+        .card.no h4 .dot {
+            background: var(--acento)
+        }
+
+        /* quote */
+        blockquote {
+            margin: 26px 0;
+            padding: 24px 28px;
+            background: var(--escuro);
+            color: var(--creme);
+            border-radius: 16px;
+            position: relative;
+            max-width: 72ch;
+            font-family: "Fraunces";
+            font-weight: 400;
+            font-size: 1.18rem;
+            line-height: 1.45;
+            font-style: italic
+        }
+
+        blockquote::before {
+            content: "\201C";
+            font-size: 4rem;
+            position: absolute;
+            left: 14px;
+            top: -6px;
+            color: var(--mel);
+            opacity: .55;
+            font-family: "Fraunces"
+        }
+
+        blockquote .who {
+            display: block;
+            margin-top: 14px;
+            font-family: "Space Mono", monospace;
+            font-style: normal;
+            font-size: .7rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--mel-claro)
+        }
+
+        blockquote.cris {
+            background: var(--marrom)
+        }
+
+        /* stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2px;
+            background: var(--linha);
+            border: 1px solid var(--linha);
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 26px 0
+        }
+
+        .stat {
+            background: var(--creme);
+            padding: 22px 20px
+        }
+
+        .stat .n {
+            font-family: "Fraunces";
+            font-weight: 700;
+            font-size: 2.1rem;
+            color: var(--mel);
+            line-height: 1;
+            letter-spacing: -.02em
+        }
+
+        .stat .l {
+            font-size: .85rem;
+            color: var(--marrom);
+            margin-top: 8px;
+            line-height: 1.3
+        }
+
+        /* ====== GRÁFICO ====== */
+        .chart-card {
+            background: var(--creme);
+            border: 1px solid var(--linha);
+            border-radius: 16px;
+            padding: 28px 30px 24px;
+            margin: 26px 0;
+            max-width: 860px
+        }
+
+        .chart-card .chart-title {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--escuro)
+        }
+
+        .chart-card .chart-sub {
+            font-size: .95rem;
+            color: var(--marrom);
+            font-style: italic;
+            margin: 4px 0 22px;
+            max-width: 60ch
+        }
+
+        .chart svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible
+        }
+
+        .chart .axis-line {
+            stroke: var(--linha);
+            stroke-width: 1
+        }
+
+        .chart .grid-line {
+            stroke: var(--linha);
+            stroke-width: 1;
+            stroke-dasharray: 3 4;
+            opacity: .7
+        }
+
+        .chart .axis-label {
+            font-family: "Space Mono", monospace;
+            font-size: 11px;
+            fill: var(--marrom)
+        }
+
+        .chart .bar-label {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: 15px;
+            fill: var(--escuro)
+        }
+
+        .chart .bar-value {
+            font-family: "Fraunces";
+            font-weight: 700;
+            font-size: 17px;
+            fill: var(--marrom)
+        }
+
+        .chart .bar {
+            fill: var(--mel);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transform-box: fill-box;
+            animation: growbar 1.1s cubic-bezier(.2, .8, .2, 1) forwards
+        }
+
+        .chart .bar.b1 {
+            animation-delay: .1s
+        }
+
+        .chart .bar.b2 {
+            animation-delay: .35s;
+            fill: var(--mel-claro)
+        }
+
+        .chart .bar.b3 {
+            animation-delay: .6s;
+            fill: var(--marrom)
+        }
+
+        @keyframes growbar {
+            to {
+                transform: scaleY(1)
+            }
+        }
+
+        .chart-goal {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+            padding: 16px 20px;
+            border: 1px dashed var(--mel);
+            background: var(--mel-palido);
+            border-radius: 12px
+        }
+
+        .chart-goal .big {
+            font-family: "Fraunces";
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--acento);
+            line-height: 1
+        }
+
+        .chart-goal .txt {
+            font-size: .95rem;
+            color: var(--marrom)
+        }
+
+        .chart-goal .txt b {
+            color: var(--escuro)
+        }
+
+        /* timeline */
+        .timeline {
+            border-left: 2px solid var(--linha);
+            margin: 24px 0 10px;
+            padding-left: 0
+        }
+
+        .tl {
+            position: relative;
+            padding: 0 0 26px 30px
+        }
+
+        .tl::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: var(--mel);
+            border: 2px solid var(--creme);
+            clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)
+        }
+
+        .tl .when {
+            font-family: "Space Mono", monospace;
+            font-size: .72rem;
+            letter-spacing: .1em;
+            color: var(--acento);
+            text-transform: uppercase
+        }
+
+        .tl .what {
+            margin-top: 3px
+        }
+
+        .tl .what strong {
+            display: block
+        }
+
+        /* dois donos */
+        .voices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin: 24px 0
+        }
+
+        .voice {
+            border: 1px solid var(--linha);
+            border-radius: 14px;
+            padding: 22px;
+            background: var(--creme)
+        }
+
+        .voice .name {
+            font-family: "Fraunces";
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px
+        }
+
+        .voice .name .badge {
+            font-family: "Space Mono", monospace;
+            font-size: .6rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            background: var(--mel-palido);
+            color: var(--marrom);
+            padding: 3px 8px;
+            border-radius: 20px
+        }
+
+        .voice .role {
+            font-size: .85rem;
+            color: var(--acento);
+            font-family: "Space Mono", monospace;
+            margin-bottom: 10px
+        }
+
+        .voice p {
+            font-size: .98rem;
+            color: var(--marrom)
+        }
+
+        /* callout */
+        .callout {
+            border: 1px dashed var(--mel);
+            background: var(--mel-palido);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin: 24px 0;
+            max-width: 72ch
+        }
+
+        .callout .k {
+            font-family: "Space Mono", monospace;
+            font-size: .66rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--acento);
+            display: block;
+            margin-bottom: 6px
+        }
+
+        /* footer practical */
+        .practical {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            margin-top: 24px
+        }
+
+        .practical .item {
+            border-top: 2px solid var(--mel);
+            padding-top: 12px
+        }
+
+        .practical .item .k {
+            font-family: "Space Mono", monospace;
+            font-size: .66rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--marrom)
+        }
+
+        .practical .item .v {
+            font-size: 1.05rem;
+            color: var(--escuro);
+            margin-top: 4px
+        }
+
+        footer.end {
+            padding: 50px 60px;
+            background: var(--escuro);
+            color: var(--mel-palido);
+            font-size: .82rem;
+            font-family: "Space Mono", monospace;
+            letter-spacing: .04em
+        }
+
+        footer.end b {
+            color: var(--mel-claro)
+        }
+
+        /* reveal on load / scroll */
+        section,
+        header.hero h1,
+        header.hero p.lede {
+            animation: rise .8s ease both
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* responsive */
+        @media(max-width:900px) {
+            .wrap {
+                grid-template-columns: 1fr
+            }
+
+            nav.toc {
+                position: static;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--linha)
+            }
+
+            nav.toc ol {
+                margin-top: 18px;
+                column-count: 2;
+                column-gap: 14px
+            }
+
+            header.hero,
+            section,
+            footer.end {
+                padding-left: 26px;
+                padding-right: 26px
+            }
+
+            .voices {
+                grid-template-columns: 1fr
+            }
+
+            .back-top.is-visible {
+                display: flex
+            }
+        }
+
+        .back-top {
+            display: none;
+            position: fixed;
+            bottom: 22px;
+            right: 18px;
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--linha);
+            border-radius: 50%;
+            background: var(--escuro);
+            color: var(--mel-claro);
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(26, 18, 8, .22);
+            transition: background .2s, transform .2s, opacity .2s
+        }
+
+        .back-top:hover,
+        .back-top:focus-visible {
+            background: var(--marrom);
+            transform: translateY(-2px);
+            outline: none
+        }
+
+        .back-top svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <!-- ============ NAV / SUMÁRIO ============ -->
+        <nav class="toc">
+            <div class="brand">Com<b>bee</b>nation</div>
+            <span class="brand-sub">A casa do Buddy Bee · dossiê interno</span>
+            <ol>
+                <li><a href="#identidade">Identidade e nome</a></li>
+                <li><a href="#origem">Como tudo começou</a></li>
+                <li><a href="#proposito">Propósito e filosofia</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#mel">O mel</a></li>
+                <li><a href="#estrutura">Estrutura e números</a></li>
+                <li><a href="#manejo">Manejo e técnica</a></li>
+                <li><a href="#sustentabilidade">Sustentabilidade</a></li>
+                <li><a href="#conhecimento">Conhecimento técnico</a></li>
+                <li><a href="#publico">Público que se quer atingir</a></li>
+                <li><a href="#marca">Marca e comunicação</a></li>
+                <li><a href="#diferenciais">Diferenciais</a></li>
+                <li><a href="#sentimentos">Sentimentos e história</a></li>
+                <li><a href="#objetivos">Objetivos e futuro</a></li>
+                <li><a href="#donos">As duas vozes</a></li>
+                <li><a href="#praticas">Informações práticas</a></li>
+            </ol>
+        </nav>
+
+        <main>
+            <!-- ============ HERO ============ -->
+            <header class="hero">
+                <div class="hex-deco"></div>
+                <div class="hex-deco two"></div>
+                <span class="tag">Dossiê dos fundadores · Guga &amp; Cris</span>
+                <h1>Tudo o que se passa<br>na cabeça de quem<br><em>salva abelhas</em>.</h1>
+                <p class="lede">Este documento reúne, organiza e cruza as ideias, conceitos e sentimentos do Guga e da
+                    Cris sobre a Combeenation. Serve para consultar, a qualquer momento, o que move o negócio.</p>
+                <div class="meta">
+                    <span>Davie / Fort Lauderdale · South Florida</span>
+                    <span>Iniciado em novembro de 2024</span>
+                    <span>Produzindo mel, salvando abelhas</span>
+                </div>
+            </header>
+
+            <!-- 1 IDENTIDADE -->
+            <section id="identidade">
+                <div class="sec-head"><span class="sec-num">01</span>
+                    <h2>Identidade e nome</h2>
+                </div>
+                <p class="sec-intro">Duas marcas que convivem: a empresa e o rótulo afetivo.</p>
+
+                <p><strong>Combeenation</strong> é uma empresa voltada à <strong>produção de mel</strong> e à
+                    <strong>remoção e relocação de enxames</strong>, no primeiro momento. O nome vem de combinar: unir a
+                    produção de mel com o ato de salvar as abelhas. É a combinação de produzir e preservar ao mesmo
+                    tempo.
+                </p>
+
+                <p>Por trás dela existe um segundo nome, mais afetivo: <strong>Buddy Bee</strong>. A Cris descreve a
+                    relação assim: "a Combeenation é a casa do Buddy Bee". A empresa era, na origem, para se chamar só
+                    Buddy Bee; o Guga achou que ficava pouco profissional e criou a Combeenation por cima. Mas o Buddy
+                    Bee nunca saiu da cabeça deles, porque combina com o histórico de resgate do casal e fica mais
+                    bonito e apelativo no rótulo do vidro de mel.</p>
+
+                <div class="callout">
+                    <span class="k">Decisão de marca em aberto</span>
+                    A Cris quer manter as duas coisas: <strong>Combeenation</strong> como empresa e como casa, e
+                    <strong>Buddy Bee</strong> como rótulo do mel. O nome completo registrado é <strong>Combeenation
+                        Removal and Honey Sales</strong>, com a linha <strong>Saving Bees, Producing Honey</strong>.
+                </div>
+
+                <blockquote>O Combeenation me remete mais à coisa de manejo de abelha. O Buddy Bee fica bonitinho no
+                    rótulo, mais apelativo para o vidrinho de mel. Acho que seria legal manter as duas coisas.<span
+                        class="who">Cris</span></blockquote>
+
+                <p>O <strong>Buddy</strong> é o mascote: um dos cachorros do casal, resgatado, que virou estrelinha da
+                    marca.</p>
+            </section>
+
+            <!-- 2 ORIGEM -->
+            <section id="origem">
+                <div class="sec-head"><span class="sec-num">02</span>
+                    <h2>Como tudo começou</h2>
+                </div>
+                <p class="sec-intro">Não foi um plano de negócio. Foi um resgate que virou paixão.</p>
+
+                <p>A vontade de trabalhar com abelhas vinha de longe, desde o Brasil, mas nunca tinha havido
+                    oportunidade. A Cris já tinha tido algum contato na infância (lembra de "mexer com abelha", de ver
+                    mel sendo estocado e vendido); o Guga nunca tinha tido experiência nenhuma. A faísca recente veio de
+                    um amigo que comprou uma caixa de abelha e começou a contar como era a experiência.</p>
+
+                <p>O Guga trabalha como <strong>policial numa universidade (a NSU)</strong>. No campus havia o apiário
+                    de um professor que mantinha um projeto de abelhas. Esse professor foi embora para outro estado e
+                    <strong>abandonou as caixas</strong>. Sem ninguém cuidando, as colmeias foram se degradando.
+                </p>
+
+                <p>O Guga começou a observar, notou a degradação, conversou com pessoas da direção da escola e foi
+                    <strong>ganhando os enxames abandonados</strong>: primeiro alguns num terreno, depois outros, até
+                    receber o "santuário", que virou o apiário principal (o cercado). Eram cerca de <strong>oito
+                        colmeias fracas, doentes, infestadas</strong>, principalmente pelo besouro, que toma conta de
+                    colônias enfraquecidas.
+                </p>
+
+                <p>Ganhou as abelhas <strong>sem saber nada de abelha</strong>. Foi aí que decidiu aprender de verdade,
+                    e a ideia de empresa nasceu daí: produzir mel ao mesmo tempo em que salva as abelhas, que estão a
+                    caminho de um cenário preocupante de extinção.</p>
+
+                <blockquote>Eu ganhei as abelhas sem saber nada de abelha. A ideia da empresa é essa: produzir mel ao
+                    mesmo tempo que a gente salva as abelhas.<span class="who">Guga</span></blockquote>
+            </section>
+
+            <!-- 3 PROPÓSITO -->
+            <section id="proposito">
+                <div class="sec-head"><span class="sec-num">03</span>
+                    <h2>Propósito e filosofia</h2>
+                </div>
+                <p class="sec-intro">O lucro é necessário, mas vem depois do bem-estar das abelhas.</p>
+
+                <p>O propósito declarado é simples e repetido como um mantra: <strong>produzir mel salvando as
+                        abelhas</strong>. A filosofia central é <strong>não explorar</strong>. Tirar o mínimo possível
+                    da produção delas, crescer junto com elas, colocar a saúde e o bem-estar da colmeia em primeiro
+                    lugar.</p>
+
+                <ul class="clean">
+                    <li>Crescer, sim, mas <strong>crescer junto com as abelhas</strong>, com o bem-estar e a expansão
+                        delas.</li>
+                    <li>Lucro é necessário (sem lucro o negócio não anda), mas vem <strong>depois</strong> do cuidado.
+                    </li>
+                    <li>Reação a um mercado em que muitos apicultores só querem dinheiro e fazem "fachada" de cuidado
+                        ambiental.</li>
+                    <li>Movimento ativo: convencer empresas grandes a chamar a Combeenation <strong>em vez do controle
+                            de pestes</strong>, que mata as abelhas.</li>
+                </ul>
+
+                <blockquote>Antes do meu lucro eu quero o bem-estar das abelhas. A minha ideia é elas me explorarem, me
+                    darem um pouco de retorno, e não o contrário.<span class="who">Guga</span></blockquote>
+            </section>
+
+            <!-- 4 PRODUTOS -->
+            <section id="produtos">
+                <div class="sec-head"><span class="sec-num">04</span>
+                    <h2>Produtos</h2>
+                </div>
+                <p class="sec-intro">Hoje, basicamente mel. O resto é um leque de futuro, com limites claros.</p>
+
+                <h3>Agora</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="dot"></span>Mel local</h4>
+                        <p>O produto principal do início. A primeira colheita rendeu 38 libras (cerca de 17 kg) de uma
+                            caixa só, mas foi para consumo próprio. Ainda não há mel para vender; a expectativa é colher
+                            o suficiente para venda nesta estação.</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Cera (uso interno)</h4>
+                        <p>Produzida, mas só para consumo interno: recobrir as lâminas de cera de plástico (a base
+                            alveolada), onde as abelhas constroem os próximos favos.</p>
+                    </div>
+                </div>
+
+                <h3>Futuro (planejado)</h3>
+                <div class="grid">
+                    <div class="card future">
+                        <h4><span class="dot"></span>Rainhas</h4>
+                        <p>Já está aprendendo a produção de rainhas (a transferência de larvas). Plano: ano que vem
+                            trocar todas as rainhas do apiário pelas próprias e, ao chegar a 50 caixas, vender rainhas.
+                        </p>
+                    </div>
+                    <div class="card future">
+                        <h4><span class="dot"></span>Núcleos</h4>
+                        <p>Pequenas colônias de 5 favos com rainha, enviadas ao cliente como um pacote inicial para ele
+                            montar a própria colmeia. Tende a "dar bastante".</p>
+                    </div>
+                    <div class="card future">
+                        <h4><span class="dot"></span>Produtos da marca</h4>
+                        <p>Caixas, favos e itens com a marca para loja virtual, e venda exclusiva do produto contra
+                            pragas, se der certo.</p>
+                    </div>
+                </div>
+
+                <h3>O que NÃO pretende fazer (por filosofia)</h3>
+                <div class="grid">
+                    <div class="card no">
+                        <h4><span class="dot"></span>Própolis</h4>
+                        <p>"Deixo para elas." Faz parte de tirar o mínimo da colmeia.</p>
+                    </div>
+                    <div class="card no">
+                        <h4><span class="dot"></span>Pólen e geleia real</h4>
+                        <p>Sem intenção, ao menos por agora.</p>
+                    </div>
+                    <div class="card no">
+                        <h4><span class="dot"></span>Cera para venda</h4>
+                        <p>Só uso interno por enquanto.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5 SERVIÇOS -->
+            <section id="servicos">
+                <div class="sec-head"><span class="sec-num">05</span>
+                    <h2>Serviços</h2>
+                </div>
+                <p class="sec-intro">O carro-chefe de serviço é tirar enxames sem matar nenhum.</p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="dot"></span>Remoção e relocação</h4>
+                        <p>O serviço básico, junto com o mel. Já fizeram bastante teste e prática. O Guga construiu um
+                            aspirador de abelhas com modificações próprias. <strong>Nunca exterminam</strong>: nada de
+                            químico, nem antes nem depois.</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Manejo de colmeias</h4>
+                        <p>Paralelo à remoção. Se o cliente quer ficar com o enxame, a Combeenation cuida de toda a
+                            parte burocrática (leis municipais e estaduais) e instala a colmeia na casa ou no negócio.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Manutenção mensal (cuidar da colmeia do cliente)</h4>
+                        <p>Ideia que "ninguém faz": por uma mensalidade, cuidar da colmeia do cliente e, na época,
+                            extrair e entregar o mel daquela própria colmeia. Falta resolver o custo-benefício.</p>
+                    </div>
+                </div>
+
+                <h3>Futuro e ressalvas</h3>
+                <div class="grid">
+                    <div class="card future">
+                        <h4><span class="dot"></span>Oficinas e consultoria</h4>
+                        <p>Informação, seminários, talvez pela internet. Na área deles quase não há agricultores; a
+                            consultoria fica para mais adiante (provavelmente ano que vem).</p>
+                    </div>
+                    <div class="card future">
+                        <h4><span class="dot"></span>Apicultura em telhados / projeto com governo</h4>
+                        <p>Ideia de criar, via NSU e um departamento do governo federal dentro da escola, um projeto de
+                            preservação de abelhas. Mais para frente.</p>
+                    </div>
+                    <div class="card no">
+                        <h4><span class="dot"></span>Polinização agrícola</h4>
+                        <p>Pouco interesse agora. A relocação para polinizar (por exemplo, na Califórnia) causa alta
+                            mortalidade e doenças intestinais por pesticidas e mudança de ambiente. Só faria no futuro
+                            com apiários fixos dentro das fazendas.</p>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <span class="k">Princípio inegociável</span>
+                    Remover e relocar, nunca exterminar. O Guga nem espreia o local: avisa que "as abelhas vão voltar",
+                    porque o feromônio da rainha permanece e atrai novas abelhas. Há casos em que <strong>não pegam o
+                        serviço</strong> quando não há condição segura de retirar.
+                </div>
+            </section>
+
+            <!-- 6 MEL -->
+            <section id="mel">
+                <div class="sec-head"><span class="sec-num">06</span>
+                    <h2>O mel</h2>
+                </div>
+                <p class="sec-intro">Mel local de muitas flores. Honesto, pouco manipulado, sem promessa que não dá para
+                    cumprir.</p>
+
+                <p>No sul da Flórida é quase impossível caracterizar o mel por uma planta só: há manga, laranja,
+                    cravo-da-índia e uma variedade enorme de flores. É o que se chama <strong>mel local, de flores
+                        silvestres</strong>, mistura de pólen de muitas plantas. A primeira amostra trouxe duas cores
+                    bem definidas (uma clarinha, uma mais rosada, provavelmente de manga); misturadas, deram "um mel uma
+                    delícia".</p>
+
+                <p>A apicultura ali é "outra dimensão": <strong>acontece quase o ano inteiro</strong>. Difícil dizer
+                    "estou com fluxo de néctar de manga agora". Quanto mais ao norte, mais definidas as estações e mais
+                    dá para diferenciar o florado.</p>
+
+                <h3>Qualidade</h3>
+                <ul class="clean">
+                    <li>Testado com <strong>refratômetro</strong>. Nada com mais de 25% de umidade. "Não preciso
+                        arriscar."</li>
+                    <li>Pouco manipulado: apenas filtrado na peneira.</li>
+                    <li>"Mel orgânico não existe, é conversa fiada." A honestidade do discurso é parte da qualidade.
+                    </li>
+                </ul>
+
+                <h3>Georgia (futuro)</h3>
+                <p>No sítio na Georgia dá para ter mel de florada específica conforme estação e plantação ao redor:
+                    provavelmente <strong>algodão e amendoim</strong>. O Guga está tirando autorização para
+                    <strong>transporte de mel entre estados</strong>: trazer mel de amendoim e algodão para a Flórida, e
+                    levar o mel da Flórida para distribuição na Georgia.
+                </p>
+
+                <p>Embalagens ainda em aberto; a Cris imagina frascos pequenos (cogitou algo em torno de 230 gramas).
+                </p>
+            </section>
+
+            <!-- 7 ESTRUTURA -->
+            <section id="estrutura">
+                <div class="sec-head"><span class="sec-num">07</span>
+                    <h2>Estrutura e números</h2>
+                </div>
+                <p class="sec-intro">De 6 caixas a um sonho de mil. O crescimento depende, sobretudo, de lugar.</p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="n">~6 → 26</div>
+                        <div class="l">Caixas, do início (há pouco mais de um ano) até hoje</div>
+                    </div>
+                    <div class="stat">
+                        <div class="n">+25</div>
+                        <div class="l">Espaço novo certificado liberado na NSU (até 60 para controle de enxames)</div>
+                    </div>
+                    <div class="stat">
+                        <div class="n">50</div>
+                        <div class="l">Teto prático para este primeiro momento</div>
+                    </div>
+                    <div class="stat">
+                        <div class="n">1.000</div>
+                        <div class="l">A meta de longo prazo (5 a 10 anos). "O número que eu sempre boto na minha
+                            frente."</div>
+                    </div>
+                    <div class="stat">
+                        <div class="n">2,7 a 3,6 t</div>
+                        <div class="l">Mel por ano estimado na estrutura atual de 50 a 60 caixas (6 a 8 mil libras)
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="n">300 a 600</div>
+                        <div class="l">Caixas projetadas para o sítio na Georgia</div>
+                    </div>
+                </div>
+
+                <!-- ====== GRÁFICO: EVOLUÇÃO DO NÚMERO DE COLMEIAS ====== -->
+                <div class="chart-card">
+                    <div class="chart-title">A evolução mais evidente: o número de colmeias</div>
+                    <div class="chart-sub">De cerca de 6 para 26 colmeias em pouco mais de um ano, com espaço já
+                        liberado para chegar a 50. Acima, a meta de longo prazo que orienta tudo.</div>
+                    <div class="chart" role="img"
+                        aria-label="Gráfico de barras verticais mostrando a evolução do número de colmeias: início com 6, hoje 26 e curto prazo 50.">
+                        <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+                            <!-- linhas de grade horizontais (0 a 50) -->
+                            <g>
+                                <line class="grid-line" x1="70" y1="220" x2="450" y2="220" />
+                                <line class="grid-line" x1="70" y1="182" x2="450" y2="182" />
+                                <line class="grid-line" x1="70" y1="144" x2="450" y2="144" />
+                                <line class="grid-line" x1="70" y1="106" x2="450" y2="106" />
+                                <line class="grid-line" x1="70" y1="68" x2="450" y2="68" />
+                                <line class="grid-line" x1="70" y1="30" x2="450" y2="30" />
+                            </g>
+                            <!-- eixos -->
+                            <line class="axis-line" x1="70" y1="30" x2="70" y2="220" />
+                            <line class="axis-line" x1="70" y1="220" x2="450" y2="220" />
+
+                            <!-- Barra 1: Início (6) -> altura = 6/50*190 = 22.8 -->
+                            <rect class="bar b1" x="115" y="197.2" width="70" height="22.8" rx="4" />
+                            <text class="bar-value" x="150" y="190" text-anchor="middle">6</text>
+                            <text class="bar-label" x="150" y="244" text-anchor="middle">Início</text>
+
+                            <!-- Barra 2: Hoje (26) -> altura = 26/50*190 = 98.8 -->
+                            <rect class="bar b2" x="225" y="121.2" width="70" height="98.8" rx="4" />
+                            <text class="bar-value" x="260" y="114" text-anchor="middle">26</text>
+                            <text class="bar-label" x="260" y="244" text-anchor="middle">Hoje</text>
+
+                            <!-- Barra 3: Curto prazo (50) -> altura = 50/50*190 = 190 -->
+                            <rect class="bar b3" x="335" y="30" width="70" height="190" rx="4" />
+                            <text class="bar-value" x="370" y="23" text-anchor="middle">50</text>
+                            <text class="bar-label" x="370" y="244" text-anchor="middle">Curto prazo</text>
+
+                            <!-- rótulos do eixo Y -->
+                            <text class="axis-label" x="58" y="224" text-anchor="end">0</text>
+                            <text class="axis-label" x="58" y="186" text-anchor="end">10</text>
+                            <text class="axis-label" x="58" y="148" text-anchor="end">20</text>
+                            <text class="axis-label" x="58" y="110" text-anchor="end">30</text>
+                            <text class="axis-label" x="58" y="72" text-anchor="end">40</text>
+                            <text class="axis-label" x="58" y="34" text-anchor="end">50</text>
+                            <text class="axis-label" x="18" y="125" text-anchor="middle"
+                                transform="rotate(-90, 18, 125)">número de colmeias</text>
+                        </svg>
+                    </div>
+                    <div class="chart-goal">
+                        <div class="big">1.000</div>
+                        <div class="txt"><b>Meta de longo prazo (5 a 10 anos).</b> Cerca de 20 vezes o teto atual de 50
+                            colmeias. Some o sítio na Georgia (300 a 600), os apiários em fazendas e uma possível base
+                            perto de Orlando.</div>
+                    </div>
+                </div>
+
+                <h3>Onde ficam os apiários</h3>
+                <ul class="clean">
+                    <li>Dois apiários hoje, <strong>dentro da NSU</strong> (faculdade), com 26 colmeias.</li>
+                    <li>Apiário de Júpiter foi removido (abelhas morrendo por causa do cascudo).</li>
+                    <li>Possibilidade no norte da Flórida (perto de Orlando), não por agora.</li>
+                    <li>Futuro principal: o <strong>sítio na Georgia</strong>, mais apiários dentro de fazendas (por
+                        exemplo, 10 fazendas com 40 caixas cada).</li>
+                </ul>
+
+                <div class="callout">
+                    <span class="k">A grande dependência</span>
+                    Produção de mel depende de <strong>local</strong>. A regulamentação limita o número de colmeias por
+                    área, e varia entre Secretaria da Agricultura, prefeituras e estado ("a mão direita não sabe o que a
+                    esquerda faz"). A expansão depende muito da estadia no sítio e da aceitação das abelhas lá.
+                </div>
+
+                <h3>Tipo de abelha</h3>
+                <p>Está mudando a genética do apiário: comprando <strong>rainhas selecionadas e certificadas</strong>
+                    pelo Departamento da Agricultura (europeias, da linhagem carniólica). Produzem um pouco menos de
+                    mel, mas são <strong>muito mais dóceis</strong>, o que importa por estarem dentro de uma faculdade.
+                    Rainhas agressivas (africanizadas) e de procedência desconhecida são trocadas por obrigação.</p>
+            </section>
+
+            <!-- 8 MANEJO -->
+            <section id="manejo">
+                <div class="sec-head"><span class="sec-num">08</span>
+                    <h2>Manejo e técnica</h2>
+                </div>
+                <p class="sec-intro">Método tradicional, ajustado por pesquisa. Foco, agora, em produção de mel.</p>
+
+                <p>O manejo é "tradicional": a caixa ninho embaixo com as crias, a tela excluidora de rainha e as
+                    melgueiras por cima, para a rainha não botar ovo onde vai o mel. Em algumas colmeias usa
+                    <strong>ninho duplo</strong>.
+                </p>
+
+                <p>Está aplicando o método <strong>Demaree</strong>: leva as crias para cima, mantém a rainha embaixo e
+                    simula um enxame para ela. As abelhas que nascem em cima descem para ajudar, e o topo vira produção.
+                    Uma colmeia bem conduzida assim poderia dar 150 libras (cerca de 68 kg) ou mais (deu um "passo
+                    atrás" calculado ao enfraquecer caixas, e está recuperando).</p>
+
+                <div class="callout">
+                    <span class="k">A bifurcação da apicultura</span>
+                    Ou se trabalha para <strong>produzir mel</strong>, ou para <strong>produzir abelha</strong> (ampliar
+                    o apiário). Neste momento o foco é mel.
+                </div>
+
+                <h3>Rotina e tratamentos</h3>
+                <ul class="clean">
+                    <li><strong>Inspeções</strong> semanais ou a cada duas semanas, conforme a necessidade.</li>
+                    <li>Alimentação na época certa (açúcar e água), com cuidado para não dar comida demais.</li>
+                    <li><strong>Óleos essenciais</strong> (capim-limão, lavanda, tomilho, orégano) na comida: quase um
+                        antibiótico natural para o sistema digestivo.</li>
+                    <li>Contra cascudo e varroa: <strong>ácido oxálico</strong> em vapor e pastas que viram vapor.
+                        Aprovados, comestíveis, presentes naturalmente em alimentos.</li>
+                    <li>No chão: sal para prevenir grama e cascudo, evitando químicos.</li>
+                    <li>Produção de rainhas em preparação ("difícil, delicado").</li>
+                </ul>
+
+                <p>O processo é, nas palavras do Guga, <strong>artesanal e familiar, baseado em informação técnica e
+                        pesquisa científica</strong>.</p>
+            </section>
+
+            <!-- 9 SUSTENTABILIDADE -->
+            <section id="sustentabilidade">
+                <div class="sec-head"><span class="sec-num">09</span>
+                    <h2>Sustentabilidade</h2>
+                </div>
+                <p class="sec-intro">Tudo gira em torno de preservar as abelhas. Sem deixar rastro.</p>
+
+                <blockquote>É sabido que, se as abelhas morrerem, a raça humana dura 4 ou 5 anos. 85% da polinização
+                    mundial é feita pelas abelhas. A minha preocupação é com as abelhas.<span class="who">Guga</span>
+                </blockquote>
+
+                <ul class="clean">
+                    <li>Nenhum químico que deixe rastro no mel. Os únicos tratamentos (ácidos) são naturais e não deixam
+                        resíduo.</li>
+                    <li>Preocupação real: já existem <strong>traços de pesticidas em méis</strong> por aí; o objetivo é
+                        não ser um deles.</li>
+                    <li>Fortalecer a colmeia (digestivo, glândulas de cera e de reprodução) para que ela se defenda
+                        sozinha.</li>
+                    <li>Colmeia saudável = boa produção + mais polinização no entorno.</li>
+                </ul>
+
+                <h3>A lição do amigo (por que o manejo importa)</h3>
+                <p>Um amigo tinha uma colmeia grande e não fazia manejo. O Guga avisou: alimente, abra as caixas, faça
+                    controle de enxameação. O amigo não cuidou. Resultado: a colmeia trocou a rainha sozinha e enxameou,
+                    ficou fraca, sofreu ataque de pilhagem de outras colmeias e acabou abandonada (as abelhas foram
+                    embora por fraqueza e falta de comida). Enquanto isso, o Guga entrou no inverno com 20 caixas e saiu
+                    com o mesmo número. <strong>O cuidado constante é o diferencial técnico.</strong></p>
+            </section>
+
+            <!-- 10 CONHECIMENTO -->
+            <section id="conhecimento">
+                <div class="sec-head"><span class="sec-num">10</span>
+                    <h2>Conhecimento técnico</h2>
+                </div>
+                <p class="sec-intro">Uma fixação que virou reconhecimento profissional em menos de um ano.</p>
+
+                <p>O Guga não consegue parar de estudar: é "quase uma fixação". A fonte é séria: <strong>pesquisa
+                        científica, universidades, apicultores reconhecidos no YouTube</strong>, e não redes como TikTok
+                    ou Twitter. Aprende inclusive só de parar e observar o voo das abelhas no apiário.</p>
+
+                <div class="callout">
+                    <span class="k">O momento que virou um empurrão</span>
+                    Na inspeção do Departamento da Agricultura, a inspetora disse que fazia anos que não via um apiário
+                    com aquele nível de <strong>higiene, organização e localização</strong>. Achou que ele tinha de 5 a
+                    10 anos de experiência. Eram <strong>menos de 8 meses</strong>. Ela ofereceu uma posição no
+                    Departamento e disse que ele já estava pronto para dar oficinas.
+                </div>
+
+                <p>Marcos de crescimento: começou com cerca de 25 caixas, fez um projeto para expandir e chegou a 73 (de
+                    25 mais 48), sabendo de antemão que parte daquelas 48 daria errado, e deu, o que ele lê como sinal
+                    de conhecimento adquirido.</p>
+
+                <blockquote>Se hoje eu fosse fazer outro doutorado, com certeza seria em entomologia. Não duvido que no
+                    futuro eu faça um artigo, uma pesquisa com as abelhas.<span class="who">Guga</span></blockquote>
+
+                <p>Há também uma <strong>ideia de produto contra pragas</strong> (contra uma das pragas locais). Se der
+                    certo, na visão do Guga, "é produto para virar milionário". Falta tempo para desenvolver.</p>
+            </section>
+
+            <!-- 11 PÚBLICO -->
+            <section id="publico">
+                <div class="sec-head"><span class="sec-num">11</span>
+                    <h2>Público que se quer atingir</h2>
+                </div>
+                <p class="sec-intro">Começa local, no boca a boca e nas redes de confiança do casal.</p>
+
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="dot"></span>Rede pessoal e institucional</h4>
+                        <p>Polícia (vários departamentos e agências que o Guga conhece), bombeiros, hospitais e a
+                            escola. Público presente e de confiança.</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Empresa da Cris</h4>
+                        <p>O patrão dela se ofereceu para comprar a produção e distribuir (Orlando, Georgia, Texas).
+                            Lucro menor, mas sem dor de cabeça de logística: produz, embala e entrega.</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Quem busca natural</h4>
+                        <p>Muita gente já pergunta "quando vão ter mel?", justamente por ser produção local e sem
+                            mistura.</p>
+                    </div>
+                </div>
+
+                <h3>Para o segundo momento</h3>
+                <ul class="clean">
+                    <li><strong>Feiras de produtor</strong> (feirinhas orgânicas) e mercadinhos menores, quando a
+                        produção crescer.</li>
+                    <li>Possível <strong>marca própria de terceiros</strong>: produtores grandes não dão conta da
+                        demanda e compram mel local certificado para embalar com a própria marca.</li>
+                    <li>Escolas e projetos educativos: por enquanto não, mas a NSU pode abrir projetos.</li>
+                </ul>
+
+                <div class="callout">
+                    <span class="k">Realidade da demanda</span>
+                    A produção será <strong>limitada e sazonal</strong>. O próprio Guga sabe que talvez não consiga
+                    acompanhar a demanda. Quase nenhum produtor de mel consegue.
+                </div>
+            </section>
+
+            <!-- 12 MARCA -->
+            <section id="marca">
+                <div class="sec-head"><span class="sec-num">12</span>
+                    <h2>Marca e comunicação</h2>
+                </div>
+                <p class="sec-intro">Profissional, mas com o carinho à mostra. Ambiental, não frio.</p>
+
+                <p>Houve uma tensão saudável de direção: o Guga pensou em algo <strong>mais sofisticado e frio</strong>;
+                    a Cris puxou para o <strong>familiar e afetivo</strong>, com o cachorrinho (Buddy). Venceu o caminho
+                    ambiental: preocupado com a natureza, com calor humano.</p>
+
+                <h3>O que querem transmitir</h3>
+                <ul class="clean">
+                    <li>Produção de mel <strong>sem explorar</strong> as abelhas.</li>
+                    <li>Profissional e confiável, mas mostrando o <strong>carinho</strong> pelo animal.</li>
+                    <li>Se possível, transmitir a <strong>paz de espírito</strong> que o trabalho com as abelhas dá.
+                    </li>
+                </ul>
+
+                <h3>Identidade visual</h3>
+                <ul class="clean">
+                    <li><strong>Cores</strong> (do cartão de visita): amarelo, marrom, preto e um pouco de branco. Um
+                        amarelo meio alaranjado, tom mel.</li>
+                    <li><strong>Mascote</strong>: o Buddy, o cachorro resgatado.</li>
+                    <li><strong>Rótulo</strong>: o nome Buddy Bee funciona melhor no vidro do que Combeenation.</li>
+                </ul>
+
+                <h3>O que o site deve fazer (por enquanto)</h3>
+                <p>No primeiro momento, mostrar que a <strong>empresa está aberta</strong>: que existe venda de mel e
+                    serviço de remoção, extração e relocação de abelhas. Simples e direto.</p>
+            </section>
+
+            <!-- 13 DIFERENCIAIS -->
+            <section id="diferenciais">
+                <div class="sec-head"><span class="sec-num">13</span>
+                    <h2>Diferenciais</h2>
+                </div>
+                <p class="sec-intro">O que torna a Combeenation diferente.</p>
+                <div class="grid">
+                    <div class="card">
+                        <h4><span class="dot"></span>Carinho genuíno</h4>
+                        <p>Tanto o Guga quanto a Cris adoram os bichos. O bem-estar vem antes do lucro. Não é fachada.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Não explorar</h4>
+                        <p>Tirar o mínimo da colmeia, crescer junto com as abelhas. Produzir mel salvando abelhas.</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Qualidade honesta</h4>
+                        <p>Mel local, abaixo de 25% de umidade, só filtrado. Sem promessas falsas (nada de "orgânico").
+                        </p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>100% local</h4>
+                        <p>Mel de flores silvestres no sul da Flórida; florados específicos na Georgia, com transporte
+                            entre estados próprio.</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Cuidar da colmeia do cliente</h4>
+                        <p>Manejar a colmeia do cliente e entregar o mel dela: "uma coisa que ninguém faz".</p>
+                    </div>
+                    <div class="card">
+                        <h4><span class="dot"></span>Técnica de pesquisa</h4>
+                        <p>Produção familiar guiada por ciência, reconhecida pelo Departamento da Agricultura.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 14 SENTIMENTOS -->
+            <section id="sentimentos">
+                <div class="sec-head"><span class="sec-num">14</span>
+                    <h2>Sentimentos e história pessoal</h2>
+                </div>
+                <p class="sec-intro">O coração do negócio. Aqui mora o "porquê" que não cabe numa planilha.</p>
+
+                <p>Para o Guga, as abelhas revelaram uma <strong>paixão escondida</strong> que ele não sabia ter. Virou
+                    retorno pessoal que fazia muito tempo que não sentia. Parou de dar aula para se dedicar mais a elas.
+                    Conseguiu juntar o objetivo de negócio com a realização pessoal, dele e da Cris.</p>
+
+                <blockquote>As abelhas, pra mim, viraram uma fixação. Eu não sabia que ia gostar tanto. Junto o meu
+                    objetivo de negócio com a minha realização pessoal, e a da Cris também.<span class="who">Guga</span>
+                </blockquote>
+
+                <p>Para a Cris, o ponto mais forte é o <strong>estado de espírito</strong>. Um domingo inteiro no
+                    apiário, das 8 da manhã às 4, 5 da tarde, no calor, sem parar, inspecionando caixa por caixa. Chega
+                    em casa cansada fisicamente, mas com uma paz rara.</p>
+
+                <blockquote class="cris">Dá uma paz de espírito tão grande trabalhar com elas, uma calma tão gostosa,
+                    que é surreal. Nunca tive um trabalho onde eu relaxasse dessa forma, mentalmente.<span
+                        class="who">Cris</span></blockquote>
+
+                <h3>O histórico de resgate</h3>
+                <p>O casal está junto há cerca de <strong>28 anos</strong> e sempre resgatou animais de rua: cachorros,
+                    gatos, alimentando gato de rua. O que fizeram com as abelhas foi, no fundo, <strong>mais um
+                        resgate</strong>: colônias abandonadas e destinadas a morrer em poucos meses. Daí o Buddy Bee
+                    fazer tanto sentido como alma da marca.</p>
+
+                <blockquote class="cris">Elas são bichinhos muito especiais. É quase mágico o poder e a capacidade que
+                    têm. E ao mesmo tempo precisam da nossa ajuda. Tem muita coisa prejudicando: formiga, iguana,
+                    passarinho, sapo. A gente tem que pensar em tudo isso.<span class="who">Cris</span></blockquote>
+
+                <p>A satisfação concreta: tirar um enxame de uma caixa de irrigação na escola, montar uma caixa nova com
+                    tudo direitinho e, em uma ou duas semanas, ver que <strong>elas aceitaram a casa</strong> e estão
+                    respondendo ao tratamento. Até aqui só investiram, cuidaram e gastaram (quilos e quilos de açúcar,
+                    caixas e material novos), mas a recompensa emocional já existe.</p>
+
+                <div class="callout">
+                    <span class="k">Honestidade do fundador</span>
+                    Em um ano, o Guga não tirou lucro: "não vendi nada, só gastei", e gasta mais do que deveria por
+                    preocupação com as abelhas. Por ora é quase um passatempo virando negócio; quer começar a vender mel
+                    para ter a sensação de negócio e um pouco de retribuição pelo esforço.
+                </div>
+            </section>
+
+            <!-- 15 OBJETIVOS -->
+            <section id="objetivos">
+                <div class="sec-head"><span class="sec-num">15</span>
+                    <h2>Objetivos e futuro</h2>
+                </div>
+                <p class="sec-intro">Crescimento comedido agora, ambição grande depois da aposentadoria.</p>
+
+                <div class="timeline">
+                    <div class="tl"><span class="when">Agora</span>
+                        <div class="what"><strong>Vender local</strong> (polícia, bombeiros, hospitais) e começar a
+                            entregar para o negócio da Cris, levando a marca a outras regiões e estados aos poucos.
+                        </div>
+                    </div>
+                    <div class="tl"><span class="when">Próximo estágio</span>
+                        <div class="what"><strong>Popular o segundo apiário</strong> (mais 25 caixas). Vira trabalho com
+                            abelha todas as manhãs e nos fins de semana, quase um meio período.</div>
+                    </div>
+                    <div class="tl"><span class="when">Ano que vem</span>
+                        <div class="what"><strong>Trocar as rainhas pelas próprias</strong>; ao chegar a 50 caixas,
+                            iniciar venda de rainhas e núcleos. Possível mudança de foco da remoção para o mel mais
+                            rainhas.</div>
+                    </div>
+                    <div class="tl"><span class="when">~4 anos (aposentadoria da polícia)</span>
+                        <div class="what">Crescimento acelera. Até lá, expansão "bem comedida" por falta de tempo.</div>
+                    </div>
+                    <div class="tl"><span class="when">Longo prazo (5 a 10 anos)</span>
+                        <div class="what"><strong>1.000 caixas</strong>, sítio na Georgia produtivo, marca forte,
+                            <strong>loja virtual</strong> e comunidade em torno das abelhas, possivelmente via escola e
+                            governo.
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="clean">
+                    <li>Criar uma <strong>marca forte</strong>, com sustentabilidade real.</li>
+                    <li><strong>Crescer em produção</strong> (depende de local e tempo).</li>
+                    <li>Formar uma <strong>comunidade</strong> em torno das abelhas e da preservação.</li>
+                    <li><strong>Loja virtual</strong> com produtos da marca, para reforçar a construção da marca.</li>
+                </ul>
+            </section>
+
+            <!-- 16 DONOS -->
+            <section id="donos">
+                <div class="sec-head"><span class="sec-num">16</span>
+                    <h2>As duas vozes</h2>
+                </div>
+                <p class="sec-intro">O mesmo negócio, visto de dois ângulos que se completam.</p>
+                <div class="voices">
+                    <div class="voice">
+                        <div class="name">Guga <span class="badge">Fundador</span></div>
+                        <div class="role">Técnica · estratégia · operação</div>
+                        <p>Policial na NSU, parou de dar aula para se dedicar às abelhas. É o motor técnico: pesquisa
+                            científica, manejo, produção de rainhas, números e metas (mil caixas). Pensa em produto
+                            contra pragas, transporte entre estados, expansão. Descobriu uma paixão que não sabia ter;
+                            sonha em fazer um doutorado em entomologia. Tende ao sofisticado, mas aceitou o caminho
+                            afetivo.</p>
+                    </div>
+                    <div class="voice">
+                        <div class="name">Cris <span class="badge">Fundadora</span></div>
+                        <div class="role">Alma · marca · vínculo afetivo</div>
+                        <p>Teve contato com abelhas na infância. É a guardiã do lado emocional: a paz de espírito do
+                            apiário, o carinho pelos bichos, o histórico de resgate de 28 anos. Puxou a marca para o
+                            familiar, defende o Buddy Bee e o mascote Buddy no rótulo. Cuida da ponte com a rede de
+                            venda (a empresa dela) e quer que o site mostre o afeto.</p>
+                    </div>
+                </div>
+                <p style="margin-top:18px"><em>Observação para consulta:</em> quando os dois falam, convergem no
+                    essencial (não explorar, qualidade local, crescer junto com as abelhas). Divergem de leve no tom:
+                    Guga puxa para técnica e escala, Cris para afeto e significado. As duas leituras importam para
+                    qualquer decisão de marca, produto ou comunicação.</p>
+            </section>
+
+            <!-- 17 PRÁTICAS -->
+            <section id="praticas">
+                <div class="sec-head"><span class="sec-num">17</span>
+                    <h2>Informações práticas</h2>
+                </div>
+                <p class="sec-intro">Os dados duros, para quando precisar deles.</p>
+                <div class="practical">
+                    <div class="item">
+                        <div class="k">Nome da empresa</div>
+                        <div class="v">Combeenation Removal &amp; Honey Sales</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Rótulo / mascote</div>
+                        <div class="v">Buddy Bee · cachorro Buddy</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Linha</div>
+                        <div class="v">Saving Bees, Producing Honey</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Cidade / região</div>
+                        <div class="v">Davie / Fort Lauderdale · South Florida</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Telefone / WhatsApp</div>
+                        <div class="v">954-793-5366</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">E-mail</div>
+                        <div class="v">combeenationfl@gmail.com <small>(confirmar grafia exata)</small></div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Instagram</div>
+                        <div class="v">Ainda não criado</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Certificações</div>
+                        <div class="v">Apicultor certificado · apiários inspecionados e em conformidade</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Início do cuidado</div>
+                        <div class="v">Novembro de 2024</div>
+                    </div>
+                    <div class="item">
+                        <div class="k">Fotos / certificados</div>
+                        <div class="v">A Cris enviará</div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <span class="k">Pendências para confirmar</span>
+                    Grafia exata do e-mail · embalagens (tamanho dos frascos) · foto oficial · decisão final entre
+                    Combeenation e Buddy Bee no material · cópia da certificação para arquivo.
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="end">
+        Dossiê interno da <b>Combeenation</b> · compilado a partir das entrevistas com <b>Guga</b> e <b>Cris</b> ·
+        organizado para consulta: ideias, conceitos e sentimentos dos donos do negócio.<br>
+        Produzindo mel, salvando abelhas, uma colmeia de cada vez.
+    </footer>
+
+    <button type="button" class="back-top" id="back-top" aria-label="Voltar ao topo" title="Voltar ao topo">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 5l-7 7h4v7h6v-7h4z" />
+        </svg>
+    </button>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('back-top');
+            if (!btn) return;
+            var mq = window.matchMedia('(max-width: 900px)');
+
+            function atualizarBotao() {
+                if (!mq.matches) {
+                    btn.classList.remove('is-visible');
+                    return;
+                }
+                btn.classList.toggle('is-visible', window.scrollY > 320);
+            }
+
+            btn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            window.addEventListener('scroll', atualizarBotao, { passive: true });
+            mq.addEventListener('change', atualizarBotao);
+            atualizarBotao();
+        })();
+    </script>
+
+</body>
+
+</html>
