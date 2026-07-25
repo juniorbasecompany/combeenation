@@ -207,6 +207,7 @@
             text-decoration: none;
             white-space: nowrap;
         }
+        .nav__links .button { white-space: nowrap; }
         .nav__links a:not(.button):hover { color: var(--color-honey); }
         .menu-toggle {
             display: none;
@@ -375,17 +376,39 @@
         .service-card p { margin-bottom: 0; color: #62584c; }
         .service-card__icon {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
+            top: .65rem;
+            right: .65rem;
             display: grid;
-            width: 58px;
-            height: 58px;
+            width: 148px;
+            height: 148px;
             place-items: center;
-            border-radius: 50%;
-            background: var(--color-honey-pale);
-            font-size: 1.55rem;
+            color: var(--color-honey);
+            opacity: .82;
+            pointer-events: none;
+            animation: service-icon-drift 5.4s ease-in-out infinite;
         }
-        .service-card__icon .svg-icon { color: var(--color-bark); }
+        .service-card__icon .svg-icon {
+            width: 116px;
+            height: 116px;
+            color: inherit;
+            stroke-width: 1.65;
+            filter: drop-shadow(0 9px 14px rgba(246,183,25,.14));
+            transition: transform 400ms cubic-bezier(.2,.75,.25,1), opacity var(--transition);
+        }
+        .service-card:nth-child(2) .service-card__icon { animation-delay: -.9s; }
+        .service-card:nth-child(3) .service-card__icon { animation-delay: -1.8s; }
+        .service-card:nth-child(4) .service-card__icon { animation-delay: -2.7s; }
+        .service-card:nth-child(5) .service-card__icon { animation-delay: -3.6s; }
+        .service-card:nth-child(6) .service-card__icon { animation-delay: -4.5s; }
+        .service-card:hover .service-card__icon { opacity: 1; }
+        .service-card:hover .service-card__icon .svg-icon { transform: scale(1.055); }
+        @keyframes service-icon-drift {
+            0%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+            50% { transform: translate3d(0, -5px, 0) rotate(1.2deg); }
+        }
+        .service-card h3,
+        .service-card p,
+        .service-card__number { position: relative; z-index: 1; }
         .thermal {
             display: flex;
             align-items: center;
@@ -409,6 +432,58 @@
         }
         .thermal strong { color: var(--color-honey); }
 
+        /* Trilhas decorativas */
+        .services, .story, .area, .pricing, .faq, .contact {
+            position: relative;
+            overflow: hidden;
+        }
+        .services > .container, .process > .container, .story > .container, .area > .container,
+        .pricing > .container, .faq > .container, .contact > .container {
+            position: relative;
+            z-index: 1;
+        }
+        .bee-route {
+            position: absolute;
+            z-index: 2;
+            bottom: .45rem;
+            width: min(22vw, 260px);
+            height: auto;
+            overflow: visible;
+            color: rgba(62,104,72,.3);
+            pointer-events: none;
+        }
+        .bee-route__path {
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 3.2;
+            stroke-linecap: round;
+            stroke-dasharray: 9 12;
+            animation: bee-route-flow 16s linear infinite;
+        }
+        .bee-route__bee {
+            fill: none;
+            stroke: currentColor;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: bee-route-bob 4.6s ease-in-out infinite;
+        }
+        .bee-route--hero { left: var(--page-padding); color: rgba(246,183,25,.42); }
+        .bee-route--services { right: var(--page-padding); }
+        .bee-route--process { left: var(--page-padding); color: rgba(255,217,102,.38); }
+        .bee-route--story { right: var(--page-padding); }
+        .bee-route--honey { left: var(--page-padding); color: rgba(23,20,15,.3); }
+        .bee-route--area { right: var(--page-padding); }
+        .bee-route--pricing { left: var(--page-padding); }
+        .bee-route--faq { right: var(--page-padding); }
+        .bee-route--contact { left: var(--page-padding); color: rgba(246,183,25,.4); }
+        @keyframes bee-route-flow { to { stroke-dashoffset: -80; } }
+        @keyframes bee-route-bob {
+            0%, 100% { translate: 0 0; rotate: -2deg; }
+            50% { translate: 0 -5px; rotate: 3deg; }
+        }
+
         /* Processo */
         .process {
             position: relative;
@@ -416,14 +491,6 @@
             padding: var(--section-padding) 0;
             background: var(--color-green);
             color: var(--color-white);
-        }
-        .process__bee-line {
-            position: absolute;
-            right: -2rem;
-            bottom: 1rem;
-            width: min(34vw, 430px);
-            color: rgba(255,217,102,.18);
-            pointer-events: none;
         }
         .process .eyebrow { color: var(--color-honey-light); }
         .process__layout {
@@ -888,6 +955,9 @@
             .buddy-badge { right: .5rem; bottom: 1rem; }
             .service-grid { grid-template-columns: 1fr; }
             .service-card { min-height: 280px; }
+            .service-card__icon { top: .4rem; right: .25rem; width: 126px; height: 126px; }
+            .service-card__icon .svg-icon { width: 98px; height: 98px; }
+            .bee-route { width: 190px; }
             .honey__facts { grid-template-columns: 1fr; }
             .honey__fact { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
             .story__art { min-height: 420px; }
@@ -905,13 +975,56 @@
 <body>
     <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
         <symbol id="icon-bee" viewBox="0 0 24 24">
-            <ellipse cx="12" cy="13" rx="4.5" ry="6"/><path d="M8.3 10.2h7.4M7.6 13.5h8.8M9 17h6M10.3 7.4 8.7 5.2M13.7 7.4l1.6-2.2M8 11C4.5 7.5 2.2 10 4 13.7M16 11c3.5-3.5 5.8-1 4 2.7"/>
+            <g stroke-width="1.45">
+                <circle cx="12" cy="5.5" r="2.2"/>
+                <path d="M10.5 3.8 8.8 1.9M13.5 3.8l1.7-1.9"/>
+                <ellipse cx="12" cy="13.2" rx="4.1" ry="6.3"/>
+                <path d="M8.3 10.4C4.7 6.7 1.7 8.7 3.2 12c1.1 2.5 3.6 2.6 5.2.9M15.7 10.4c3.6-3.7 6.6-1.7 5.1 1.6-1.1 2.5-3.6 2.6-5.2.9"/>
+                <path d="M8.1 12.2h7.8M8.1 15h7.8M9.3 17.7h5.4"/>
+                <path d="m8.2 12-3.1-2M8.2 15l-3 2.2M15.8 12l3.1-2M15.8 15l3 2.2"/>
+            </g>
         </symbol>
         <symbol id="icon-hive" viewBox="0 0 24 24"><path d="M5 20h14M7 20v-2h10v2M6.5 18l-1-3h13l-1 3M5.5 15l1-3h11l1 3M6.5 12l1-3h9l1 3M9 9l1-3h4l1 3M10.3 17v-2h3.4v2"/></symbol>
         <symbol id="icon-swarm" viewBox="0 0 24 24"><path d="M8.5 18.5c-3.5-1.2-4.8-4.3-2.7-6.8-1.2-3.5 2.5-5.6 5.1-3.8 2-3.4 6.4-1.4 6.1 2 3.4.5 3.8 5.1.8 6.4-.5 3.4-5.2 4.2-7 1.6"/><circle cx="9" cy="12" r=".8" fill="currentColor" stroke="none"/><circle cx="13" cy="10" r=".8" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14" r=".8" fill="currentColor" stroke="none"/></symbol>
         <symbol id="icon-care" viewBox="0 0 24 24"><path d="M12 20s-7-3.8-7-9.2C5 7 9.8 5.7 12 9c2.2-3.3 7-2 7 1.8C19 16.2 12 20 12 20ZM12 9v6M9 12h6"/></symbol>
         <symbol id="icon-honey" viewBox="0 0 24 24"><path d="M8 7h8M9 4h6v3H9zM7 10c0-1.7 1.3-3 3-3h4c1.7 0 3 1.3 3 3v8c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2zM7 12h10M10 15h4"/></symbol>
         <symbol id="icon-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m5 17 4-4 3 3 2-2 5 3"/></symbol>
+        <symbol id="service-live-removal" viewBox="0 0 64 64">
+            <path d="M13 43c7 0 11 3 19 10M51 43c-7 0-11 3-19 10M13 43l-5-7c-2-3-6-1-5 2l5 12c2 5 7 8 13 9M51 43l5-7c2-3 6-1 5 2l-5 12c-2 5-7 8-13 9"/>
+            <use href="#icon-bee" x="20" y="6" width="24" height="24"/>
+            <path d="m10 15 2-3m39 3-2-3M7 25H3m54 0h4"/>
+        </symbol>
+        <symbol id="service-hive-relocation" viewBox="0 0 64 64">
+            <path d="M6 50h24M9 50v-5h18v5M7 45l-2-7h26l-2 7M6 38l3-7h18l3 7M10 31l3-7h10l3 7M15 38v4h6v-4"/>
+            <path d="M36 49h22M39 49v-4h16v4M38 45l-2-6h22l-2 6M39 39l3-6h10l3 6M45 39v3h4v-3"/>
+            <path d="M27 17c9-8 19-5 22 5M45 17l4 5 5-4"/>
+            <path d="M20 14c-2-4-7-3-7 1s5 7 8 3c3 4 8 1 7-3s-6-5-8-1Z"/>
+        </symbol>
+        <symbol id="service-swarm-removal" viewBox="0 0 64 64">
+            <path d="M5 13c13-5 24-2 31 5M8 14c3 8 10 10 17 7"/>
+            <path d="M31 19c-9 1-15 7-15 15 0 10 8 16 17 16 10 0 17-7 17-16 0-8-7-14-15-15"/>
+            <circle cx="25" cy="29" r="1.2" fill="currentColor" stroke="none"/><circle cx="34" cy="26" r="1.2" fill="currentColor" stroke="none"/><circle cx="41" cy="32" r="1.2" fill="currentColor" stroke="none"/><circle cx="29" cy="38" r="1.2" fill="currentColor" stroke="none"/><circle cx="38" cy="42" r="1.2" fill="currentColor" stroke="none"/>
+            <path d="M14 52c13 5 28 6 40-1M49 47l5 4-4 5"/>
+            <path d="M51 16c-3-4-8-1-6 3s7 3 7-1c4 1 6-4 3-6s-7 0-4 4Z"/>
+        </symbol>
+        <symbol id="service-apiary-care" viewBox="0 0 64 64">
+            <path d="M10 55h42M14 55v-6h34v6M11 49l-3-9h46l-3 9M10 40l4-9h34l4 9M15 31l5-9h22l5 9M25 40v6h12v-6"/>
+            <path d="M32 19s-10-5-10-12c0-5 7-7 10-2 3-5 10-3 10 2 0 7-10 12-10 12Z"/>
+            <path d="M5 28c5-1 8-4 9-9-5 0-9 3-9 9Zm54 0c-5-1-8-4-9-9 5 0 9 3 9 9Z"/>
+        </symbol>
+        <symbol id="service-local-honey" viewBox="0 0 64 64">
+            <path d="M16 19h30M19 11h24v8H19zM14 25c0-3 3-6 6-6h22c3 0 6 3 6 6v27c0 4-3 7-7 7H21c-4 0-7-3-7-7z"/>
+            <path d="M14 35c9-5 18 3 27-1 3-1 5-2 7-1M23 39h17v12H23zM27 43h9"/>
+            <path d="M51 15c5 3 8 8 7 14M55 12l-4 3 4 3"/>
+            <use href="#icon-bee" x="0" y="5" width="18" height="18"/>
+        </symbol>
+        <symbol id="service-send-photo" viewBox="0 0 64 64">
+            <rect x="12" y="4" width="40" height="56" rx="7"/><path d="M24 10h16M27 54h10"/>
+            <rect x="18" y="16" width="28" height="26" rx="4"/>
+            <path d="M18 36l8-8 6 6 4-4 10 9"/>
+            <use href="#icon-bee" x="25" y="16" width="20" height="20"/>
+            <path d="M7 20v-5c0-4 3-7 7-7M57 20v-5c0-4-3-7-7-7"/>
+        </symbol>
     </svg>
     <header class="site-header">
         <div class="container nav">
@@ -939,6 +1052,10 @@
 
     <main>
         <section class="hero" id="home">
+            <svg class="bee-route bee-route--hero" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M8 88C72 28 133 96 211 63S321 31 394 62"/>
+                <use class="bee-route__bee" href="#icon-bee" x="350" y="34" width="56" height="56"/>
+            </svg>
             <div class="container hero__grid">
                 <div class="hero__copy">
                     <p class="eyebrow">Humane bee removal · South Florida</p>
@@ -979,6 +1096,10 @@
         </div>
 
         <section class="services" id="services">
+            <svg class="bee-route bee-route--services" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M410 91C342 38 280 94 210 60S84 29 18 71"/>
+                <use class="bee-route__bee" href="#icon-bee" x="4" y="35" width="56" height="56"/>
+            </svg>
             <div class="container">
                 <div class="section-heading reveal">
                     <div>
@@ -989,37 +1110,37 @@
                 </div>
                 <div class="service-grid">
                     <article class="service-card reveal">
-                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#icon-bee"/></svg></span>
+                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#service-live-removal"/></svg></span>
                         <span class="service-card__number">SERVICE 01</span>
                         <h3>Live bee removal</h3>
                         <p>Safe removal of honeybees from homes, businesses, trees, irrigation boxes and other challenging spaces.</p>
                     </article>
                     <article class="service-card reveal">
-                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#icon-hive"/></svg></span>
+                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#service-hive-relocation"/></svg></span>
                         <span class="service-card__number">SERVICE 02</span>
                         <h3>Hive relocation</h3>
                         <p>We move the rescued colony into a proper hive and relocate it to one of our managed apiaries.</p>
                     </article>
                     <article class="service-card reveal">
-                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#icon-swarm"/></svg></span>
+                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#service-swarm-removal"/></svg></span>
                         <span class="service-card__number">SERVICE 03</span>
                         <h3>Swarm removal</h3>
                         <p>Quick assessment and collection before a temporary swarm establishes itself inside a structure.</p>
                     </article>
                     <article class="service-card reveal">
-                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#icon-care"/></svg></span>
+                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#service-apiary-care"/></svg></span>
                         <span class="service-card__number">SERVICE 04</span>
                         <h3>Apiary care</h3>
                         <p>Thoughtful hive inspections, feeding and health-focused care for small private apiaries.</p>
                     </article>
                     <article class="service-card reveal">
-                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#icon-honey"/></svg></span>
+                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#service-local-honey"/></svg></span>
                         <span class="service-card__number">SERVICE 05</span>
                         <h3>Local raw honey</h3>
                         <p>Small-batch South Florida honey, kept as close to the hive as possible and available by request.</p>
                     </article>
                     <article class="service-card reveal">
-                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#icon-photo"/></svg></span>
+                        <span class="service-card__icon" aria-hidden="true"><svg class="svg-icon"><use href="#service-send-photo"/></svg></span>
                         <span class="service-card__number">NOT SURE?</span>
                         <h3>Send us a photo</h3>
                         <p>Tell us where the bees are located. We will review the situation and help you choose a safe next step.</p>
@@ -1038,9 +1159,9 @@
         </section>
 
         <section class="process" id="process">
-            <svg class="process__bee-line" viewBox="0 0 430 330" aria-hidden="true">
-                <path d="M420 32C312-16 359 146 248 109S97 89 159 193 79 317 8 257" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="7 10"/>
-                <g transform="translate(4 235) scale(4.2)" stroke="currentColor"><use href="#icon-bee"/></g>
+            <svg class="bee-route bee-route--process" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M9 80C73 19 147 96 222 57S340 35 402 70"/>
+                <use class="bee-route__bee" href="#icon-bee" x="356" y="34" width="56" height="56"/>
             </svg>
             <div class="container process__layout">
                 <div class="process__sticky reveal">
@@ -1072,6 +1193,10 @@
         </section>
 
         <section class="story" id="story">
+            <svg class="bee-route bee-route--story" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M408 84C342 24 274 96 205 61S83 34 17 76"/>
+                <use class="bee-route__bee" href="#icon-bee" x="3" y="36" width="56" height="56"/>
+            </svg>
             <div class="container story__grid">
                 <div class="story__art reveal" aria-label="The House of Buddy Bees">
                     <img class="buddy" src="data:image/webp;base64,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" alt="Buddy, the rescue dog who inspired Buddy Bees Honey">
@@ -1095,6 +1220,10 @@
         </section>
 
         <section class="honey-section" id="honey">
+            <svg class="bee-route bee-route--honey" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M8 91C80 40 126 99 199 59S324 26 403 68"/>
+                <use class="bee-route__bee" href="#icon-bee" x="356" y="32" width="56" height="56"/>
+            </svg>
             <div class="container honey__grid">
                 <div class="honey__copy reveal">
                     <p class="eyebrow">Buddy Bees Honey</p>
@@ -1127,6 +1256,10 @@
         </section>
 
         <section class="area" id="area">
+            <svg class="bee-route bee-route--area" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M411 88C347 31 288 96 213 63S83 32 17 72"/>
+                <use class="bee-route__bee" href="#icon-bee" x="3" y="34" width="56" height="56"/>
+            </svg>
             <div class="container">
                 <div class="area__card reveal">
                     <div class="area__copy">
@@ -1157,6 +1290,10 @@
         </section>
 
         <section class="pricing" id="pricing">
+            <svg class="bee-route bee-route--pricing" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M8 82C68 23 142 96 218 60S333 32 402 72"/>
+                <use class="bee-route__bee" href="#icon-bee" x="356" y="34" width="56" height="56"/>
+            </svg>
             <div class="container">
                 <div class="pricing__head reveal">
                     <p class="eyebrow">Honest pricing</p>
@@ -1194,6 +1331,10 @@
         </section>
 
         <section class="faq" id="faq">
+            <svg class="bee-route bee-route--faq" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M411 87C340 34 283 95 209 62S83 30 17 75"/>
+                <use class="bee-route__bee" href="#icon-bee" x="3" y="36" width="56" height="56"/>
+            </svg>
             <div class="container">
                 <div class="section-heading reveal">
                     <div>
@@ -1228,6 +1369,10 @@
         </section>
 
         <section class="contact" id="contact">
+            <svg class="bee-route bee-route--contact" viewBox="0 0 420 100" aria-hidden="true">
+                <path class="bee-route__path" d="M8 90C74 28 139 96 214 62S332 34 402 68"/>
+                <use class="bee-route__bee" href="#icon-bee" x="356" y="32" width="56" height="56"/>
+            </svg>
             <div class="container contact__grid">
                 <div class="reveal">
                     <p class="eyebrow">Let’s save this hive</p>
@@ -1367,6 +1512,7 @@
                 "A hand-drawn jar of golden South Florida honey with bees and honeycomb.": "Un frasco ilustrado de miel dorada del sur de Florida, con abejas y panal.",
                 "South Florida service area": "Área de servicio del sur de Florida",
                 "Stylized map highlighting Palm Beach, Broward and Miami-Dade counties.": "Mapa estilizado que destaca los condados de Palm Beach, Broward y Miami-Dade.",
+                "Back to top": "Volver arriba",
                 "Raw": "Cruda",
                 "Minimal handling": "Mínima manipulación",
                 "Small batch": "Lote pequeño",
@@ -1495,6 +1641,7 @@
                 "A hand-drawn jar of golden South Florida honey with bees and honeycomb.": "Um pote ilustrado de mel dourado do sul da Flórida, com abelhas e favos.",
                 "South Florida service area": "Área de atendimento no sul da Flórida",
                 "Stylized map highlighting Palm Beach, Broward and Miami-Dade counties.": "Mapa estilizado destacando os condados de Palm Beach, Broward e Miami-Dade.",
+                "Back to top": "Voltar ao topo",
                 "Raw": "Cru",
                 "Minimal handling": "Mínima manipulação",
                 "Small batch": "Pequeno lote",
