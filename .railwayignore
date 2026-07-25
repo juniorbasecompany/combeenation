@@ -1,0 +1,11 @@
+# Material interno — não publicar no deploy
+docs/
+
+# Git e metadados
+.git/
+
+# Locais / segredos
+.cursor/
+.env
+.env.*
+*.log

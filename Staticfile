@@ -1,0 +1,3 @@
+# Railway / Railpack: serve o site estático a partir da raiz do projeto
+root: .
+index_fallback: false
