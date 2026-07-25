@@ -446,6 +446,7 @@
             position: absolute;
             z-index: 2;
             bottom: .45rem;
+            left: var(--page-padding);
             width: min(22vw, 260px);
             height: auto;
             overflow: visible;
@@ -459,6 +460,7 @@
             stroke-linecap: round;
             stroke-dasharray: 9 12;
             animation: bee-route-flow 16s linear infinite;
+            animation-delay: var(--route-delay, 0s);
         }
         .bee-route__bee {
             fill: none;
@@ -468,16 +470,12 @@
             transform-box: fill-box;
             transform-origin: center;
             animation: bee-route-bob 4.6s ease-in-out infinite;
+            animation-delay: var(--route-delay, 0s);
         }
-        .bee-route--hero { left: var(--page-padding); color: rgba(246,183,25,.42); }
-        .bee-route--services { right: var(--page-padding); }
-        .bee-route--process { left: var(--page-padding); color: rgba(255,217,102,.38); }
-        .bee-route--story { right: var(--page-padding); }
-        .bee-route--honey { left: var(--page-padding); color: rgba(23,20,15,.3); }
-        .bee-route--area { right: var(--page-padding); }
-        .bee-route--pricing { left: var(--page-padding); }
-        .bee-route--faq { right: var(--page-padding); }
-        .bee-route--contact { left: var(--page-padding); color: rgba(246,183,25,.4); }
+        .bee-route--hero { color: rgba(246,183,25,.42); }
+        .bee-route--process { color: rgba(255,217,102,.38); }
+        .bee-route--honey { color: rgba(23,20,15,.3); }
+        .bee-route--contact { color: rgba(246,183,25,.4); }
         @keyframes bee-route-flow { to { stroke-dashoffset: -80; } }
         @keyframes bee-route-bob {
             0%, 100% { translate: 0 0; rotate: -2deg; }
@@ -1053,7 +1051,7 @@
     <main>
         <section class="hero" id="home">
             <svg class="bee-route bee-route--hero" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M8 88C72 28 133 96 211 63S321 31 394 62"/>
+                <path class="bee-route__path" d="M8 88C72 28 133 96 211 63S286 31 330 62"/>
                 <use class="bee-route__bee" href="#icon-bee" x="350" y="34" width="56" height="56"/>
             </svg>
             <div class="container hero__grid">
@@ -1097,7 +1095,7 @@
 
         <section class="services" id="services">
             <svg class="bee-route bee-route--services" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M410 91C342 38 280 94 210 60S84 29 18 71"/>
+                <path class="bee-route__path" d="M410 91C342 38 280 94 210 60S124 29 92 71"/>
                 <use class="bee-route__bee" href="#icon-bee" x="4" y="35" width="56" height="56"/>
             </svg>
             <div class="container">
@@ -1160,7 +1158,7 @@
 
         <section class="process" id="process">
             <svg class="bee-route bee-route--process" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M9 80C73 19 147 96 222 57S340 35 402 70"/>
+                <path class="bee-route__path" d="M9 80C73 19 147 96 222 57S292 35 336 70"/>
                 <use class="bee-route__bee" href="#icon-bee" x="356" y="34" width="56" height="56"/>
             </svg>
             <div class="container process__layout">
@@ -1194,7 +1192,7 @@
 
         <section class="story" id="story">
             <svg class="bee-route bee-route--story" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M408 84C342 24 274 96 205 61S83 34 17 76"/>
+                <path class="bee-route__path" d="M408 84C342 24 274 96 205 61S126 34 92 76"/>
                 <use class="bee-route__bee" href="#icon-bee" x="3" y="36" width="56" height="56"/>
             </svg>
             <div class="container story__grid">
@@ -1221,7 +1219,7 @@
 
         <section class="honey-section" id="honey">
             <svg class="bee-route bee-route--honey" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M8 91C80 40 126 99 199 59S324 26 403 68"/>
+                <path class="bee-route__path" d="M8 91C80 40 126 99 199 59S286 26 336 68"/>
                 <use class="bee-route__bee" href="#icon-bee" x="356" y="32" width="56" height="56"/>
             </svg>
             <div class="container honey__grid">
@@ -1257,7 +1255,7 @@
 
         <section class="area" id="area">
             <svg class="bee-route bee-route--area" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M411 88C347 31 288 96 213 63S83 32 17 72"/>
+                <path class="bee-route__path" d="M411 88C347 31 288 96 213 63S126 32 92 72"/>
                 <use class="bee-route__bee" href="#icon-bee" x="3" y="34" width="56" height="56"/>
             </svg>
             <div class="container">
@@ -1291,7 +1289,7 @@
 
         <section class="pricing" id="pricing">
             <svg class="bee-route bee-route--pricing" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M8 82C68 23 142 96 218 60S333 32 402 72"/>
+                <path class="bee-route__path" d="M8 82C68 23 142 96 218 60S292 32 336 72"/>
                 <use class="bee-route__bee" href="#icon-bee" x="356" y="34" width="56" height="56"/>
             </svg>
             <div class="container">
@@ -1332,7 +1330,7 @@
 
         <section class="faq" id="faq">
             <svg class="bee-route bee-route--faq" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M411 87C340 34 283 95 209 62S83 30 17 75"/>
+                <path class="bee-route__path" d="M411 87C340 34 283 95 209 62S126 30 92 75"/>
                 <use class="bee-route__bee" href="#icon-bee" x="3" y="36" width="56" height="56"/>
             </svg>
             <div class="container">
@@ -1370,7 +1368,7 @@
 
         <section class="contact" id="contact">
             <svg class="bee-route bee-route--contact" viewBox="0 0 420 100" aria-hidden="true">
-                <path class="bee-route__path" d="M8 90C74 28 139 96 214 62S332 34 402 68"/>
+                <path class="bee-route__path" d="M8 90C74 28 139 96 214 62S292 34 336 68"/>
                 <use class="bee-route__bee" href="#icon-bee" x="356" y="32" width="56" height="56"/>
             </svg>
             <div class="container contact__grid">
@@ -1741,6 +1739,7 @@
                 button.setAttribute("aria-pressed", String(button.dataset.language === language));
             });
             localStorage.setItem("combeenation-language", language);
+            window.requestAnimationFrame(placeBeeRoutes);
         }
 
         document.querySelectorAll("[data-language]").forEach(button => {
@@ -1778,6 +1777,132 @@
         }, { threshold: 0.12 });
 
         document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+
+        const beeRoutes = [...document.querySelectorAll(".bee-route")];
+        const routeCollisionSelector = [
+            "h1", "h2", "h3", "p", "a", "button", "input", "textarea", "select",
+            "summary", "details", "article", "img", "form", "blockquote",
+            "svg:not(.bee-route)", ".thermal", ".story__art", ".honey__facts",
+            ".values", ".area__card", ".contact__options", ".hero__visual",
+            ".hero__trust", ".section-heading"
+        ].join(",");
+
+        function randomBetween(min, max) {
+            return min + (Math.random() * (max - min));
+        }
+
+        beeRoutes.forEach(route => {
+            route.dataset.flipped = String(Math.random() > .5);
+            route.style.setProperty("--route-delay", `${-(Math.random() * 8).toFixed(2)}s`);
+
+            const startY = Math.round(randomBetween(24, 86));
+            const middleY = Math.round(randomBetween(18, 82));
+            const endY = Math.round(randomBetween(25, 75));
+            const path = route.querySelector(".bee-route__path");
+            const bee = route.querySelector(".bee-route__bee");
+
+            path.setAttribute(
+                "d",
+                `M8 ${startY} C${Math.round(randomBetween(58, 92))} ${Math.round(randomBetween(12, 88))} ` +
+                `${Math.round(randomBetween(118, 166))} ${Math.round(randomBetween(12, 88))} 205 ${middleY} ` +
+                `S${Math.round(randomBetween(268, 306))} ${Math.round(randomBetween(12, 88))} 330 ${endY}`
+            );
+            bee.setAttribute("x", "356");
+            bee.setAttribute("y", String(Math.max(4, Math.min(40, endY - 28))));
+            bee.setAttribute("width", "56");
+            bee.setAttribute("height", "56");
+
+            const section = route.closest("section");
+            if (!section.dataset.basePaddingBottom) {
+                section.dataset.basePaddingBottom = getComputedStyle(section).paddingBottom;
+            }
+        });
+
+        function rectanglesOverlap(candidate, protectedRect) {
+            return !(
+                candidate.right <= protectedRect.left ||
+                candidate.left >= protectedRect.right ||
+                candidate.bottom <= protectedRect.top ||
+                candidate.top >= protectedRect.bottom
+            );
+        }
+
+        function getProtectedRects(section) {
+            const sectionRect = section.getBoundingClientRect();
+            const elements = [...section.querySelectorAll(routeCollisionSelector)];
+            if (section.id === "home") elements.push(document.querySelector(".site-header"));
+
+            return elements
+                .filter(element => element && !element.closest(".bee-route"))
+                .map(element => element.getBoundingClientRect())
+                .filter(rect => rect.width > 0 && rect.height > 0)
+                .map(rect => ({
+                    left: rect.left - sectionRect.left - 24,
+                    top: rect.top - sectionRect.top - 24,
+                    right: rect.right - sectionRect.left + 24,
+                    bottom: rect.bottom - sectionRect.top + 24
+                }));
+        }
+
+        function placeBeeRoutes() {
+            beeRoutes.forEach(route => {
+                const section = route.closest("section");
+                section.style.paddingBottom = section.dataset.basePaddingBottom;
+
+                const sectionWidth = section.clientWidth;
+                const sectionHeight = section.clientHeight;
+                const routeWidth = route.offsetWidth;
+                const routeHeight = route.offsetHeight;
+                const safeInset = 12;
+                const protectedRects = getProtectedRects(section);
+                let candidate;
+
+                route.style.transformOrigin = "center";
+                route.style.transform = route.dataset.flipped === "true" ? "scaleX(-1)" : "none";
+
+                for (let attempt = 0; attempt < 220; attempt += 1) {
+                    const left = randomBetween(safeInset, Math.max(safeInset, sectionWidth - routeWidth - safeInset));
+                    const top = randomBetween(safeInset, Math.max(safeInset, sectionHeight - routeHeight - safeInset));
+                    const nextCandidate = {
+                        left,
+                        top,
+                        right: left + routeWidth,
+                        bottom: top + routeHeight
+                    };
+
+                    if (!protectedRects.some(rect => rectanglesOverlap(nextCandidate, rect))) {
+                        candidate = nextCandidate;
+                        break;
+                    }
+                }
+
+                if (!candidate) {
+                    const extraSpace = routeHeight + 28;
+                    const basePadding = parseFloat(section.dataset.basePaddingBottom);
+                    section.style.paddingBottom = `${basePadding + extraSpace}px`;
+                    const expandedHeight = section.clientHeight;
+                    const fallbackTop = expandedHeight - routeHeight - 12;
+                    const maxLeft = Math.max(safeInset, sectionWidth - routeWidth - safeInset);
+                    candidate = {
+                        left: randomBetween(safeInset, maxLeft),
+                        top: fallbackTop
+                    };
+                }
+
+                route.style.left = `${Math.round(candidate.left)}px`;
+                route.style.top = `${Math.round(candidate.top)}px`;
+                route.style.right = "auto";
+                route.style.bottom = "auto";
+            });
+        }
+
+        let beeRouteResizeFrame;
+        window.requestAnimationFrame(placeBeeRoutes);
+        window.addEventListener("load", placeBeeRoutes, { once: true });
+        window.addEventListener("resize", () => {
+            window.cancelAnimationFrame(beeRouteResizeFrame);
+            beeRouteResizeFrame = window.requestAnimationFrame(placeBeeRoutes);
+        }, { passive: true });
 
         const backToTopButton = document.querySelector(".back-to-top");
 
