@@ -1323,7 +1323,7 @@
             transition: none;
         }
 
-        .bee-flight svg {
+        .bee-flight img {
             display: block;
             width: 100%;
             height: 100%;
@@ -1332,7 +1332,7 @@
             transition: transform 250ms ease;
         }
 
-        .bee-flight.facing-right svg {
+        .bee-flight.facing-right img {
             transform: scaleX(-1);
         }
 
