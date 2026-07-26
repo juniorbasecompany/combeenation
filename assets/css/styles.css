@@ -1301,6 +1301,41 @@
             height: 22px;
         }
 
+        .bee-flight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+            z-index: 20;
+            pointer-events: none;
+            will-change: transform;
+            opacity: 0;
+            transition: opacity 800ms ease-in-out;
+        }
+
+        .bee-flight.is-visible {
+            opacity: 1;
+        }
+
+        .bee-flight.edge-hidden {
+            opacity: 0;
+            transition: none;
+        }
+
+        .bee-flight svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            transform-origin: center;
+            transition: transform 250ms ease;
+        }
+
+        .bee-flight.facing-right svg {
+            transform: scaleX(-1);
+        }
+
         /* Animação progressiva */
         .reveal {
             opacity: 0;
@@ -1522,5 +1557,10 @@
             .reveal {
                 opacity: 1;
                 transform: none;
+            }
+
+            .bee-flight {
+                transform: translate(24px, 24px);
+                transition-duration: 200ms;
             }
         }
