@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 590" >
+<defs><g id="icon-bee"><g stroke-width="1.45">
+                <circle cx="12" cy="5.5" r="2.2"/>
+                <path d="M10.5 3.8 8.8 1.9M13.5 3.8l1.7-1.9"/>
+                <ellipse cx="12" cy="13.2" rx="4.1" ry="6.3"/>
+                <path d="M8.3 10.4C4.7 6.7 1.7 8.7 3.2 12c1.1 2.5 3.6 2.6 5.2.9M15.7 10.4c3.6-3.7 6.6-1.7 5.1 1.6-1.1 2.5-3.6 2.6-5.2.9"/>
+                <path d="M8.1 12.2h7.8M8.1 15h7.8M9.3 17.7h5.4"/>
+                <path d="m8.2 12-3.1-2M8.2 15l-3 2.2M15.8 12l3.1-2M15.8 15l3 2.2"/>
+            </g></g></defs>
+
+                    <title id="honey-title">Buddy Bees local honey</title>
+                    <desc id="honey-desc">A hand-drawn jar of golden South Florida honey with bees and honeycomb.</desc>
+                    <g fill="none" stroke="#17140f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M61 123 96 63h70l35 60-35 60H96zM201 123l35-60h70l35 60-35 60h-70zM341 123l35-60h70l35 60-35 60h-70z" opacity=".22"/>
+                        <path d="M133 163h254v48c38 26 54 67 54 116v171c0 39-31 70-70 70H149c-39 0-70-31-70-70V327c0-49 16-90 54-116z" fill="#fffaf0"/>
+                        <path d="M114 105h292v63H114z" fill="#fff"/><path d="M132 124h256M132 145h256" stroke-width="4"/>
+                        <path d="M104 323c46-20 91 14 140 0s91-24 172 3v170c0 25-20 45-45 45H149c-25 0-45-20-45-45z" fill="#e99a0c"/>
+                        <path d="M130 286c44-55 216-58 260 0 35 44-9 113-130 113S95 330 130 286Z" fill="#fffaf0"/>
+                        <path d="M192 243c17-20 37-31 68-31s51 11 68 31" stroke-width="4"/>
+                        <g transform="translate(222 246) scale(3.2)"><use href="#icon-bee"/></g>
+                    </g>
+                    <text x="260" y="316" text-anchor="middle" fill="#17140f" font-family="Georgia,serif" font-size="34" font-weight="700">Buddy Bees</text>
+                    <text x="260" y="347" text-anchor="middle" fill="#17140f" font-family="Arial,sans-serif" font-size="13" font-weight="800" letter-spacing="2">SOUTH FLORIDA HONEY</text>
+                    <path d="M434 250c34 4 42 28 18 43s-55-2-44-21 37-13 32 5" fill="none" stroke="#17140f" stroke-width="3" stroke-dasharray="5 7"/>
+</svg>

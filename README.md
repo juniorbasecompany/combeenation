@@ -40,3 +40,12 @@ A pasta `docs/` e arquivos internos ficam fora do upload (ver `.railwayignore`),
 | `.railwayignore` | Exclui material interno do upload de build |
 
 Não é necessário `package.json`, Dockerfile nem comando de start manual.
+## Estrutura do site
+
+| Caminho | Conteúdo |
+| --- | --- |
+| `index.html` | Estrutura semântica da página |
+| `assets/css/styles.css` | Estilos, animações e regras responsivas |
+| `assets/js/translations.js` | Dicionários de tradução |
+| `assets/js/app.js` | Navegação, idioma, formulário e interações |
+| `assets/images/` | Imagens otimizadas usadas pelo site |

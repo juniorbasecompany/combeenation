@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 500" >
+<defs><g id="icon-bee"><g stroke-width="1.45">
+                <circle cx="12" cy="5.5" r="2.2"/>
+                <path d="M10.5 3.8 8.8 1.9M13.5 3.8l1.7-1.9"/>
+                <ellipse cx="12" cy="13.2" rx="4.1" ry="6.3"/>
+                <path d="M8.3 10.4C4.7 6.7 1.7 8.7 3.2 12c1.1 2.5 3.6 2.6 5.2.9M15.7 10.4c3.6-3.7 6.6-1.7 5.1 1.6-1.1 2.5-3.6 2.6-5.2.9"/>
+                <path d="M8.1 12.2h7.8M8.1 15h7.8M9.3 17.7h5.4"/>
+                <path d="m8.2 12-3.1-2M8.2 15l-3 2.2M15.8 12l3.1-2M15.8 15l3 2.2"/>
+            </g></g></defs>
+
+                            <title id="map-title">South Florida service area</title>
+                            <desc id="map-desc">Stylized map highlighting Palm Beach, Broward and Miami-Dade counties.</desc>
+                            <g fill="none" stroke="#17140f" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M79 99c75 3 146 5 219-7l55 37 20 78 56 113 5 78-33 46-28-37-14-88-33-69-33-60-55-28-70-9-42-29z" fill="#fffaf0" stroke-width="7"/>
+                                <path d="M296 173c42 11 77 24 103 54M319 223c34 10 70 25 95 43M341 273c32 10 60 21 83 38" stroke-width="3" opacity=".35"/>
+                                <circle cx="384" cy="241" r="9" fill="#db3b2f" stroke-width="4"/><circle cx="402" cy="289" r="9" fill="#db3b2f" stroke-width="4"/><circle cx="418" cy="341" r="9" fill="#db3b2f" stroke-width="4"/>
+                                <path d="M84 401c72-34 100-90 89-151" stroke-width="3" stroke-dasharray="7 10"/><g transform="translate(65 380) scale(2.7)"><use href="#icon-bee"/></g>
+                            </g>
+                            <g fill="#17140f" font-family="Arial,sans-serif" font-size="13" font-weight="800" letter-spacing="1">
+                                <text x="292" y="239" text-anchor="end">PALM BEACH</text><text x="315" y="287" text-anchor="end">BROWARD</text><text x="331" y="340" text-anchor="end">MIAMI-DADE</text>
+                            </g>
+                            <rect x="271" y="402" width="187" height="42" rx="21" fill="#db3b2f"/>
+                            <text x="364" y="429" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="13" font-weight="900" letter-spacing="1.5">SOUTH FLORIDA</text>
+</svg>
