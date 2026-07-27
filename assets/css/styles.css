@@ -413,8 +413,8 @@
         .buddy-badge {
             position: absolute;
             z-index: 2;
-            right: 0;
-            bottom: 2rem;
+            left: 1.5rem;
+            bottom: 1.5rem;
             max-width: 180px;
             padding: 1rem 1.2rem;
             border: 1px solid rgba(23, 20, 15, .72);
@@ -422,7 +422,7 @@
             background: var(--color-white);
             color: var(--color-ink);
             box-shadow: 8px 8px 0 var(--color-red);
-            transform: rotate(3deg);
+            transform: rotate(-3deg);
         }
 
         .buddy-badge strong {
@@ -1488,8 +1488,10 @@
             }
 
             .buddy-badge {
-                right: .5rem;
+                left: 1rem;
                 bottom: 1rem;
+                max-width: 150px;
+                padding: .85rem 1rem;
             }
 
             .service-grid {
