@@ -790,6 +790,26 @@
             line-height: 1.28;
         }
 
+        .quote + .quote {
+            margin-top: -0.5rem;
+        }
+
+        .quote p {
+            margin: 0;
+        }
+
+        .quote cite {
+            display: block;
+            margin-top: .85rem;
+            font-family: var(--font-body);
+            font-size: .75rem;
+            font-style: normal;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--color-bark);
+        }
+
         .values {
             display: flex;
             flex-wrap: wrap;

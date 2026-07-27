@@ -2,7 +2,17 @@
 
 
         const originalText = new WeakMap();
-        const translatableAttributes = ["placeholder", "aria-label", "title"];
+        const translatableAttributes = ["placeholder", "aria-label", "title", "alt"];
+
+        function normalizeKey(text) {
+            return text.replace(/\s+/g, " ").trim();
+        }
+
+        function translate(text, language) {
+            const dictionary = translations[language] || {};
+            const key = normalizeKey(text);
+            return dictionary[key] || text;
+        }
 
         function setLanguage(language) {
             const dictionary = translations[language] || {};
@@ -18,10 +28,16 @@
             while ((node = walker.nextNode())) {
                 if (!originalText.has(node)) originalText.set(node, node.nodeValue);
                 const source = originalText.get(node);
-                const trimmed = source.trim();
-                if (!trimmed) continue;
-                const translated = dictionary[trimmed] || trimmed;
-                node.nodeValue = source.replace(trimmed, translated);
+                const key = normalizeKey(source);
+                if (!key) continue;
+                const translated = dictionary[key];
+                if (!translated) {
+                    node.nodeValue = source;
+                    continue;
+                }
+                const leading = source.match(/^\s*/)[0];
+                const trailing = source.match(/\s*$/)[0];
+                node.nodeValue = leading + translated + trailing;
             }
 
             document.querySelectorAll("*").forEach(element => {
@@ -30,7 +46,7 @@
                     const dataKey = `original${attribute.replace(/(^|-)(\w)/g, (_, __, letter) => letter.toUpperCase())}`;
                     if (!element.dataset[dataKey]) element.dataset[dataKey] = element.getAttribute(attribute);
                     const source = element.dataset[dataKey];
-                    element.setAttribute(attribute, dictionary[source] || source);
+                    element.setAttribute(attribute, dictionary[normalizeKey(source)] || source);
                 });
             });
 
@@ -44,6 +60,7 @@
                 button.setAttribute("aria-pressed", String(button.dataset.language === language));
             });
             localStorage.setItem("combeenation-language", language);
+            document.documentElement.dataset.language = language;
         }
 
         document.querySelectorAll("[data-language]").forEach(button => {
@@ -57,15 +74,19 @@
             menu.classList.remove("is-open");
             document.body.classList.remove("menu-open");
             menuButton.setAttribute("aria-expanded", "false");
-            menuButton.setAttribute("aria-label", "Open navigation menu");
+            menuButton.setAttribute("aria-label", translate("Open navigation menu", document.documentElement.dataset.language || "en"));
             menuButton.textContent = "☰";
         }
 
         menuButton.addEventListener("click", () => {
             const isOpen = menu.classList.toggle("is-open");
+            const language = document.documentElement.dataset.language || "en";
             document.body.classList.toggle("menu-open", isOpen);
             menuButton.setAttribute("aria-expanded", String(isOpen));
-            menuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+            menuButton.setAttribute(
+                "aria-label",
+                translate(isOpen ? "Close navigation menu" : "Open navigation menu", language)
+            );
             menuButton.textContent = isOpen ? "×" : "☰";
         });
 
@@ -103,6 +124,7 @@
         document.getElementById("request-form").addEventListener("submit", (event) => {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
+            const language = document.documentElement.dataset.language || "en";
             const subject = encodeURIComponent(`${data.get("need")} request from ${data.get("name")}`);
             const body = encodeURIComponent(
                 `Name: ${data.get("name")}\n` +
@@ -111,7 +133,7 @@
                 `City / ZIP: ${data.get("location")}\n\n` +
                 `Details:\n${data.get("message") || "No additional details provided."}`
             );
-            document.getElementById("form-status").textContent = "Opening your email app…";
+            document.getElementById("form-status").textContent = translate("Opening your email app…", language);
             window.location.href = `mailto:comBEEnationFL@gmail.com?subject=${subject}&body=${body}`;
         });
 
