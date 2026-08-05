@@ -259,6 +259,13 @@
             gap: clamp(1rem, 2.2vw, 2.2rem);
         }
 
+        .nav__toolbar {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            flex-shrink: 0;
+        }
+
         .language-switcher {
             display: inline-flex;
             gap: .15rem;
@@ -1372,6 +1379,14 @@
             .menu-toggle {
                 display: grid;
                 place-items: center;
+                position: relative;
+                z-index: 50;
+            }
+
+            .nav__toolbar {
+                position: relative;
+                z-index: 50;
+                margin-left: auto;
             }
 
             .nav__links {
@@ -1396,11 +1411,6 @@
             .nav__links a:not(.button) {
                 font-family: var(--font-display);
                 font-size: 2rem;
-            }
-
-            .menu-toggle {
-                position: relative;
-                z-index: 50;
             }
 
             .hero {
