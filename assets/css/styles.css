@@ -1492,7 +1492,11 @@
 
         @media (max-width: 600px) {
             h1 {
-                font-size: clamp(3.3rem, 17vw, 5rem);
+                font-size: clamp(2.85rem, 13.5vw, 4.4rem);
+            }
+
+            .hero h1 span {
+                font-size: .88em;
             }
 
             .nav {
