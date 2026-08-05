@@ -14,9 +14,9 @@
 <body>
     <header class="site-header">
         <div class="container nav">
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu"
+                aria-label="Open navigation menu">☰</button>
             <a class="logo" href="#home" aria-label="ComBEEnation home">
-                <span class="logo__mark" aria-hidden="true"><img class="svg-icon" src="assets/images/svg/icon-bee.svg"
-                        alt=""></span>
                 <span>Com<strong>BEE</strong>nation</span>
             </a>
             <nav class="nav__links" id="main-menu" aria-label="Main navigation">
@@ -28,14 +28,10 @@
                 <a href="#faq">FAQ</a>
                 <a class="button button--light" href="tel:+19547935366">Call 954-793-5366</a>
             </nav>
-            <div class="nav__toolbar">
-                <div class="language-switcher" aria-label="Choose language">
-                    <button type="button" data-language="en" aria-pressed="true">EN</button>
-                    <button type="button" data-language="es" aria-pressed="false">ES</button>
-                    <button type="button" data-language="pt" aria-pressed="false">PT</button>
-                </div>
-                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu"
-                    aria-label="Open navigation menu">☰</button>
+            <div class="language-switcher" aria-label="Choose language">
+                <button type="button" data-language="en" aria-pressed="true">EN</button>
+                <button type="button" data-language="es" aria-pressed="false">ES</button>
+                <button type="button" data-language="pt" aria-pressed="false">PT</button>
             </div>
         </div>
     </header>
