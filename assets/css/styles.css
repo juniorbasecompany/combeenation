@@ -763,13 +763,29 @@
             transform: translate(-50%, -50%);
         }
 
-        .story__art .buddy {
+        /* Círculo que contém o Buddy — overflow escondido evita vazamento */
+        .buddy-clip {
             position: absolute;
             z-index: 1;
             left: 50%;
             top: 46%;
-            width: min(54%, 270px);
+            display: grid;
+            width: min(82%, 400px);
+            aspect-ratio: 1;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 50%;
             transform: translate(-50%, -50%);
+        }
+
+        .story__art .buddy {
+            position: static;
+            width: 52%;
+            max-width: none;
+            height: auto;
+            transform: none;
+            object-fit: contain;
+            filter: none;
         }
 
         .story__stamp {
@@ -812,7 +828,7 @@
             line-height: 1.28;
         }
 
-        .quote + .quote {
+        .quote+.quote {
             margin-top: -0.5rem;
         }
 

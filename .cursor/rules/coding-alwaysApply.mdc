@@ -1,0 +1,11 @@
+---
+description: Minimal diffs, local style, no drive-by fixes
+alwaysApply: true
+---
+
+- Writing: use hyphen (-); never em dash (—).
+- Change only what the task needs. No drive-by cleanup, renames, or refactors.
+- Out of scope: tell the user; do not fix unless asked.
+- Match local style in the area you edit; do not import foreign patterns.
+- In touched code only, remove orphans/duplicates left by your change.
+- Prefer simple, performant code; avoid needless complexity.
