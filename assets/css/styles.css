@@ -231,23 +231,6 @@
             line-height: 1;
         }
 
-        .logo__mark {
-            display: grid;
-            width: 42px;
-            height: 42px;
-            place-items: center;
-            border-radius: 50%;
-            background: var(--color-honey);
-            color: var(--color-ink);
-            font-family: var(--font-body);
-            font-size: 1.25rem;
-        }
-
-        .logo__mark .svg-icon {
-            width: 24px;
-            height: 24px;
-        }
-
         .logo strong {
             color: var(--color-honey);
         }
