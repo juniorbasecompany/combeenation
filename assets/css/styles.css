@@ -863,7 +863,7 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: 1.05fr .95fr;
+            grid-template-columns: .95fr 1.05fr;
             align-items: center;
             gap: clamp(3rem, 8vw, 8rem);
         }
@@ -1486,10 +1486,10 @@
 
             .story__art {
                 min-height: 500px;
-                order: 2;
             }
 
             .honey-illustration {
+                order: 2;
                 margin-top: 3rem;
             }
 
