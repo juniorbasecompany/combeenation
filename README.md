@@ -19,7 +19,7 @@ git push -u origin main
 1. Abra [railway.com/new](https://railway.com/new)
 2. Escolha **Deploy from GitHub repo**
 3. Selecione o repositório `combeenation`
-4. Aguarde o build — o Railpack detecta o site estático e sobe o Caddy automaticamente
+4. Aguarde o build - o Railpack detecta o site estático e sobe o Caddy automaticamente
 
 ### 3. Expor a URL pública
 

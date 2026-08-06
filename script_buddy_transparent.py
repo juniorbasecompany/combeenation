@@ -1,17 +1,15 @@
-"""Buddy sem contorno: todo branco vira transparente (estilo 1ª imagem)."""
+"""Buddy sem contorno: todo branco vira transparente (estilo 1a imagem)."""
 from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "docs" / "buddy.png"
-OUT_PNG = ROOT / "assets" / "images" / "buddy.png"
 OUT_WEBP = ROOT / "assets" / "images" / "buddy.webp"
-OUT_PREVIEW = ROOT / "docs" / "buddy-on-circle-preview.png"
 
-# Quase-branco → transparente (fundo, faixa, focinho, peito, contorno)
+# Quase-branco -> transparente (fundo, faixa, focinho, peito, contorno)
 WHITE_MIN = 230
 
 
@@ -30,8 +28,7 @@ def whiten_to_alpha(im: Image.Image) -> Image.Image:
                     cleared += 1
                 px[x, y] = (0, 0, 0, 0)
             else:
-                # anti-alias claro na borda do branco: suaviza alpha
-                # se for cinza muito claro residual, também some
+                # anti-alias claro na borda do branco
                 if min(r, g, b) >= 200 and abs(r - g) < 12 and abs(g - b) < 12:
                     px[x, y] = (0, 0, 0, 0)
                     cleared += 1
@@ -56,35 +53,6 @@ def trim(im: Image.Image, pad: int = 12) -> Image.Image:
     )
 
 
-def write_preview(im: Image.Image) -> None:
-    size = 640
-    margin = 40
-    diam = size - 2 * margin
-    bg = Image.new("RGBA", (size, size), (51, 41, 30, 255))
-    circle = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    ImageDraw.Draw(circle).ellipse(
-        (margin, margin, size - margin, size - margin), fill=(255, 231, 160, 255)
-    )
-    mask = Image.new("L", (size, size), 0)
-    ImageDraw.Draw(mask).ellipse(
-        (margin, margin, size - margin, size - margin), fill=255
-    )
-
-    dog_layer = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    dog = im.copy()
-    dog.thumbnail((int(diam * 0.70), int(diam * 0.70)), Image.Resampling.LANCZOS)
-    dog_layer.alpha_composite(
-        dog, ((size - dog.width) // 2, (size - dog.height) // 2 + int(diam * 0.03))
-    )
-    dog_clipped = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    dog_clipped.paste(dog_layer, (0, 0), mask)
-
-    out = Image.alpha_composite(Image.alpha_composite(bg, circle), dog_clipped)
-    OUT_PREVIEW.parent.mkdir(parents=True, exist_ok=True)
-    out.convert("RGB").save(OUT_PREVIEW)
-    print(f"wrote {OUT_PREVIEW}")
-
-
 def main() -> None:
     print(f"source: {SRC}")
     out = trim(whiten_to_alpha(Image.open(SRC)))
@@ -94,7 +62,6 @@ def main() -> None:
         if px[pt][3] != 0:
             raise SystemExit(f"corner not transparent: {pt}")
 
-    # não deve restar branco opaco (contorno)
     white_left = 0
     for y in range(out.height):
         for x in range(out.width):
@@ -105,11 +72,9 @@ def main() -> None:
     if white_left > 50:
         raise SystemExit("still has white outline/fill")
 
-    OUT_PNG.parent.mkdir(parents=True, exist_ok=True)
-    out.save(OUT_PNG, optimize=True)
+    OUT_WEBP.parent.mkdir(parents=True, exist_ok=True)
     out.save(OUT_WEBP, "WEBP", quality=92, method=6)
-    print(f"wrote {OUT_PNG} and {OUT_WEBP}")
-    write_preview(out)
+    print(f"wrote {OUT_WEBP}")
 
 
 if __name__ == "__main__":

@@ -763,7 +763,7 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Círculo que contém o Buddy — overflow escondido evita vazamento */
+        /* Círculo que contém o Buddy - overflow escondido evita vazamento */
         .buddy-clip {
             position: absolute;
             z-index: 1;
